@@ -67,3 +67,33 @@ A aba `#calculadora-s4` é uma central de download, sem cálculos dentro do site
 ### Atualizar o site que já está no GitHub
 
 Extraia o novo ZIP e substitua `index.html`, `style.css`, `app.js` e `config.js` no repositório. Antes de substituir `config.js`, copie seus IDs de vídeos e canal Twitch já configurados para a nova versão. A pasta `assets` e `.nojekyll` continuam necessários. Salve em Commit changes e aguarde o GitHub Pages republicar. Esta entrega atualiza os arquivos locais; não altera seu repositório automaticamente.
+
+
+## Acervo pessoal e identidade visual
+
+A Home agora apresenta uma coleção visual de Pangya, Yu-Gi-Oh! e MU Online, com imagens incluídas em `assets/` e ícones vetoriais próprios inspirados nos temas de golfe, cartas e fantasia. As artes dos jogos são identificadas como temáticas; não representam partidas do dono do site. Créditos e fontes em `CREDITOS.md`.
+
+Em `config.js`, personalize `archive.title`, `archive.description` e `archive.about`. As estatísticas contam somente vídeos com ID de YouTube preenchido no formato válido, sem consultar a disponibilidade no YouTube. Os seis exemplos não entram na contagem.
+
+Cada registro pode receber campos opcionais: `character` (personagem ou deck), `map` (campo ou modo), `server` (servidor ou versão), `memory` (sua lembrança escrita), `screenshot` (caminho de uma captura pessoal) e `screenshotCaption` (legenda). A busca também inclui esses dados. O campo `date` deve ser a data da jogatina, AAAA-MM-DD; o filtro Ano e as datas nos cards usam esse valor. Datas de exemplos são marcadas como ilustrativas.
+
+Exemplo de campos adicionais para um item existente:
+
+```js
+character: "",  // Seu personagem ou deck
+map: "",        // Seu campo, mapa ou modo de jogo
+server: "",     // Seu servidor ou versão
+memory: "",     // Escreva uma lembrança desta partida
+screenshot: "", // Ex.: ./assets/minha-captura.jpg; inclua também o arquivo
+screenshotCaption: ""
+```
+
+O player exibe uma ficha da jogatina e, quando preenchidos, a lembrança e a captura pessoal. Em um site publicado, o campo Link desta memória permite copiar um endereço direto. Mantenha `id` único e estável para preservar esses links.
+
+### Guardar por muitos anos
+
+O site organiza seu acervo, mas não guarda os arquivos originais dos vídeos: os players dependem do YouTube e da Twitch. Mantenha cópias dos vídeos, capturas e desta pasta em um disco e em outro local de sua escolha. Para uma publicação duradoura, use vídeos do YouTube disponíveis para incorporação; transmissões e gravações da Twitch podem deixar de estar disponíveis. Nenhuma hospedagem garante permanência eterna.
+
+### Atualização desta versão
+
+Envie também TODOS os novos arquivos da pasta `assets/`, além de `index.html`, `style.css`, `app.js` e `config.js`. Antes de substituir a configuração, preserve seus vídeos, canal e link de download reais. As alterações entregues aqui são locais; o site online muda após o envio ao GitHub.

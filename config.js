@@ -2,10 +2,24 @@
  * Não coloque senhas, tokens ou chaves aqui: este arquivo é público.
  * youtubeId: somente os 11 caracteres após v= ou youtu.be/.
  * Deixe vazio enquanto não houver vídeo real. Nenhum canal foi inventado.
- * Datas no formato AAAA-MM-DD. Remova ou substitua todos os exemplos.
+ * Datas da jogatina no formato AAAA-MM-DD. Remova ou substitua os exemplos.
+ * Campos opcionais de memória: character, map, server, memory, screenshot, screenshotCaption.
+ * Use IDs únicos e estáveis: eles identificam o link direto de cada memória.
  * game: pangya | yugioh | mu | outros
  */
 window.PORTAL_CONFIG = {
+  archive: {
+    title: "Minhas jogatinas. Minhas memórias.",
+    description: "Um lugar para guardar as partidas, os duelos e as aventuras que fizeram parte da minha história. Cada vídeo, uma lembrança. Cada jogo, um capítulo.",
+    about: "Este é o meu acervo pessoal de jogos. Aqui eu reúno minhas jogatinas e os momentos que quero poder revisitar, compartilhar e lembrar daqui a muitos anos."
+  },
+  // Artes temáticas dos jogos, separadas das suas capturas pessoais.
+  // Você pode substituir image por um arquivo seu, ex.: ./assets/meu-pangya.jpg.
+  artwork: {
+    pangya: { image: "./assets/pangya.jpg", icon: "./assets/icon-pangya.svg", credit: "Pangya / Ntreev · wallpaper temático", source: "https://www.pangyabrasil.net/" },
+    yugioh: { image: "./assets/yugioh.jpg", icon: "./assets/icon-yugioh.svg", credit: "Yu-Gi-Oh! Master Duel / KONAMI · arte temática", source: "https://store.playstation.com/en-us/concept/10001481" },
+    mu: { image: "./assets/mu.jpg", icon: "./assets/icon-mu.svg", credit: "MU Online / WEBZEN · Dark Knight", source: "https://muonline.webzen.com/en/gameinfo/guide/detail/105" }
+  },
   calculatorS4: {
     downloadUrl: "", // Cole aqui seu link HTTPS real de download. Vazio = em breve.
     version: "", // Opcional: versão real do arquivo.
