@@ -6,6 +6,13 @@
  * game: pangya | yugioh | mu | outros
  */
 window.PORTAL_CONFIG = {
+  calculatorS4: {
+    downloadUrl: "", // Cole aqui seu link HTTPS real de download. Vazio = em breve.
+    version: "", // Opcional: versão real do arquivo.
+    fileSize: "", // Opcional: tamanho real do arquivo.
+    description: "O espaço da Calculadora S4 no L3ND4 GAMES. O arquivo para download será disponibilizado por aqui.",
+    instructions: ["Quando o download estiver disponível, use o botão desta página.", "Após baixar, siga as instruções que acompanham o arquivo."]
+  },
   twitch: {
     channel: "", // Seu login Twitch, sem @ e sem URL. Vazio = placeholder.
     embed: true, // false = somente link para assistir na Twitch.

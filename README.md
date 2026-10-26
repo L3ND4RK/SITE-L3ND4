@@ -56,3 +56,14 @@ Em telas com espaço inferior a 400 px para o player, a seção orienta a abrir 
 A busca combina título, descrição, jogo e tags e pode ser usada junto com filtros. `/` foca a busca. `Esc` fecha o player e a reprodução é interrompida. Cards sem ID válido abrem uma mensagem de exemplo, sem tentar carregar um vídeo aleatório. Navegação por teclado, indicação do filtro ativo, contador anunciado, redução de movimento e link para pular ao conteúdo estão incluídos.
 
 Google Fonts fornece Inter e Barlow Condensed; sem internet, fontes locais substitutas são utilizadas. YouTube e Twitch exigem conexão e podem ter regras próprias de cookies e reprodução. O site não usa ferramentas de análise. Integrações externas recebem dados de conexão quando seus recursos são carregados; avalie os avisos de privacidade apropriados ao seu público antes de publicar.
+
+
+## Abas personalizadas e Calculadora S4
+
+Pangya, Yu-Gi-Oh! e MU Online possuem apresentação, cores e detalhes próprios, com referências dos jogos nas páginas. O botão Ver vídeos mantém a biblioteca do jogo selecionado. A Home mantém acesso a Outros jogos e inclui um card para a Calculadora S4.
+
+A aba `#calculadora-s4` é uma central de download, sem cálculos dentro do site. Em `config.js`, edite `calculatorS4.downloadUrl` e coloque seu link HTTPS real. Enquanto estiver vazio ou inválido, o botão fica desativado com Download em breve. Campos `version`, `fileSize`, `description` e `instructions` são opcionais e editáveis. Links para páginas de hospedagem abrem em nova aba; o navegador pode abrir uma página intermediária em vez de baixar diretamente.
+
+### Atualizar o site que já está no GitHub
+
+Extraia o novo ZIP e substitua `index.html`, `style.css`, `app.js` e `config.js` no repositório. Antes de substituir `config.js`, copie seus IDs de vídeos e canal Twitch já configurados para a nova versão. A pasta `assets` e `.nojekyll` continuam necessários. Salve em Commit changes e aguarde o GitHub Pages republicar. Esta entrega atualiza os arquivos locais; não altera seu repositório automaticamente.
