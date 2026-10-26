@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="L3ND4 GAMES: gameplays, duelos e aventuras. Pangya, Yu-Gi-Oh!, MU Online e muito mais.">
+  <meta name="theme-color" content="#0b0c14">
+  <title>L3ND4 GAMES — Aperte o play na próxima aventura</title>
+  <link rel="icon" href="./assets/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./config.js"></script><script defer src="./app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <header class="header"><a class="brand" href="#home" aria-label="L3ND4 GAMES — Início"><img src="./assets/mark.svg" alt="" width="38" height="38"><span>L3ND4<span class="brand-light"> GAMES</span><small>GAMEPLAY. CONEXÃO. RESENHA.</small></span></a><nav aria-label="Navegação principal" id="nav"></nav><a class="header-live" href="#lives"><span class="dot"></span> Lives</a></header>
+  <main id="conteudo">
+    <section class="hero" id="hero"><div class="hero-copy"><p class="eyebrow"><span></span> SEU PRÓXIMO PLAY COMEÇA AQUI</p><h1>Todo jogo tem<br>uma história.<br><em>Essa é a nossa.</em></h1><p class="intro">Do green ao duelo. Do primeiro level à próxima conquista. Gameplays e boas histórias com L3ND4 GAMES.</p><div class="hero-actions"><a class="primary" href="#videos">Explorar vídeos <span>↗</span></a><a class="secondary" href="#lives">◉ &nbsp; Espaço de lives</a></div><p class="hero-note">PANGYA <b>✦</b> YU-GI-OH! <b>✦</b> MU ONLINE <b>✦</b> E MAIS</p></div><div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="big-mark">L3<span>ND4</span><small>PLAYER ONE / READY</small></div><span class="art-coordinate">23° / NEXT LEVEL</span><span class="art-label">PRESS PLAY<span>▶</span></span><div class="art-grid"></div></div></section>
+    <section class="games-section" id="games-section"><div class="section-top"><div><p class="eyebrow">ESCOLHA SEU UNIVERSO</p><h2>Qual é o jogo de hoje?</h2></div><span class="muted">Quatro universos. Muitas histórias.</span></div><div id="game-links" class="game-links"></div></section>
+    <section class="library" id="videos"><div class="section-top"><div><p class="eyebrow" id="library-eyebrow">BIBLIOTECA L3ND4</p><h2 id="library-title">Bora dar o play?</h2></div><label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Buscar vídeo, jogo ou assunto…" aria-label="Buscar vídeos"><kbd>/</kbd></label></div><div class="library-toolbar"><div id="filters" class="filters" aria-label="Filtrar vídeos"></div><label class="sort">Ordenar <select id="sort"><option value="newest">Mais recentes</option><option value="title">Título A–Z</option></select></label></div><p class="demo-notice">✦ Modo demonstração · Os cards são exemplos. Adicione seus vídeos em <code>config.js</code> para começar.</p><p id="result-count" class="muted" role="status" aria-live="polite"></p><div id="video-grid" class="video-grid"></div><div id="empty" class="empty" hidden><span>⌕</span><h3>Nenhum vídeo por aqui.</h3><p>Tente outro termo ou explore todos os jogos.</p><button id="reset" class="secondary">Limpar busca e filtros</button></div></section>
+    <section class="live-section" id="lives-section"><div class="live-copy"><p class="eyebrow"><span class="dot"></span> AO VIVO, DO NOSSO JEITO</p><h2>A próxima partida<br>fica melhor <em>junto.</em></h2><p>Um espaço para acompanhar as lives, trocar ideia e fazer parte de cada jogada.</p><span id="live-status" class="status-badge">CANAL A CONFIGURAR</span><div id="twitch-actions"></div></div><div id="twitch-player" class="twitch-player"><div class="twitch-symbol" aria-hidden="true">◉</div><h3>Seu ponto de encontro na Twitch</h3><p>O canal ainda não foi configurado.<br>Em breve, a resenha começa aqui.</p><span class="placeholder-tag">ESPAÇO RESERVADO · TWITCH</span></div></section>
+    <aside class="closing"><span>GG. E ATÉ O PRÓXIMO PLAY.</span><p>O jogo muda. A vontade de jogar continua.</p><a href="#home">Voltar ao início ↑</a></aside>
+  </main><footer><a class="footer-brand" href="#home">L3ND4 <span>GAMES</span></a><p>Gameplays, duelos e aventuras.</p><small>© <span id="year"></span> L3ND4 GAMES</small></footer>
+  <dialog id="player-dialog" aria-labelledby="player-title"><div class="dialog-top"><div><p class="eyebrow" id="player-category"></p><h2 id="player-title"></h2></div><button id="close-player" class="close" aria-label="Fechar player">×</button></div><div id="player-content" class="player-content"></div><p id="player-description"></p><div id="player-link"></div></dialog>
+  <noscript><p class="demo-notice">Ative o JavaScript para usar a busca, os filtros e os players.</p></noscript>
+</body></html>
