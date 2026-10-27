@@ -56,7 +56,7 @@
     hero.append(copy, art); root.append(hero);
     if (key === 'pangya') {
       const tabs = node('nav', 'pangya-sections'); tabs.setAttribute('aria-label', 'Acervo de Pangya');
-      [['fotos', '▧', 'Fotos'], ['videos', '▶', 'Vídeos']].forEach(([section, icon, label]) => {
+      [['videos', '▶', 'Vídeos'], ['fotos', '▧', 'Fotos']].forEach(([section, icon, label]) => {
         const link = node('a', 'pangya-section-link'); link.href = '#pangya/' + section;
         const symbol = node('span', '', icon); symbol.setAttribute('aria-hidden', 'true'); link.append(symbol, node('span', '', label));
         if ((section === 'fotos') === photosSelected) link.setAttribute('aria-current', 'page'); tabs.append(link);
@@ -130,7 +130,7 @@
     let memory; if (requested.startsWith('memoria=')) { try { memory = videos.find(v => v.id === decodeURIComponent(requested.slice(8))); } catch {} }
     // #videos is an anchor on Home; game routes remain shareable on GitHub Pages.
     const current = ['pangya/fotos', 'pangya/videos', 'fotos'].includes(requested) ? 'pangya' : navigation.some(([key]) => key === requested) ? requested : 'home';
-    const pangyaPhotos = current === 'pangya' && requested !== 'pangya/videos';
+    const pangyaPhotos = current === 'pangya' && ['pangya/fotos', 'fotos'].includes(requested);
     const liveOnly = current === 'lives'; const calculatorOnly = current === 'calculadora-s4'; const category = games[current];
     $('hero').hidden = current !== 'home'; $('games-section').hidden = current !== 'home'; $('videos').hidden = liveOnly || calculatorOnly || pangyaPhotos;
     $('lives-section').hidden = Boolean(category) || calculatorOnly;

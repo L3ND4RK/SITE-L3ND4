@@ -72,7 +72,7 @@
     modal.addEventListener('click', event => { if (event.target !== modal) return; const box = modal.getBoundingClientRect(); if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) modal.close(); });
     input.addEventListener('input', render);
     function route() {
-      const visible = ['#pangya', '#pangya/fotos', '#fotos'].includes(location.hash); root.hidden = !visible;
+      const visible = ['#pangya/fotos', '#fotos'].includes(location.hash); root.hidden = !visible;
       if (!visible && modal.open) modal.close();
     }
     window.addEventListener('hashchange', route); render(); route();
