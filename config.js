@@ -16,7 +16,7 @@ window.PORTAL_CONFIG = {
   // Artes temáticas dos jogos, separadas das suas capturas pessoais.
   // Você pode substituir image por um arquivo seu, ex.: ./assets/meu-pangya.jpg.
   artwork: {
-    pangya: { image: "./assets/pangya.jpg", icon: "./assets/icon-pangya.svg", credit: "Pangya / Ntreev · wallpaper temático", source: "https://www.pangyabrasil.net/" },
+    pangya: { image: "./assets/pangya-mf-banner.jpg", icon: "./assets/icon-pangya.svg", credit: "Arte temática criada com IA para L3ND4 GAMES · marca MF fornecida pelo acervo", source: "" },
     yugioh: { image: "./assets/yugioh.jpg", icon: "./assets/icon-yugioh.svg", credit: "Yu-Gi-Oh! Master Duel / KONAMI · arte temática", source: "https://store.playstation.com/en-us/concept/10001481" }
   },
   calculatorS4: {

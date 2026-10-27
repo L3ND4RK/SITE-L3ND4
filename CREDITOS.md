@@ -10,3 +10,7 @@ As imagens temáticas abaixo identificam os jogos. Não são capturas das partid
 As imagens foram incluídas na pasta para que os elementos visuais do site não dependam de links externos. Isso não transfere a titularidade das artes. `config.js → artwork` permite substituí-las por capturas pessoais mantendo o restante do layout. As fontes acima documentam a origem das imagens; não são uma declaração de licença aberta.
 
 O desenho L3ND4 GAMES e os ícones locais compõem a identidade do portal. As fontes Inter e Barlow Condensed são solicitadas ao Google Fonts com alternativas locais de sistema.
+
+## Banner Pangya da MF
+
+`assets/pangya-mf-banner.jpg`: composição temática criada com IA para o acervo L3ND4 GAMES a partir da referência visual de Pangya e do logo MF PANGYA enviado pelo proprietário. A marca MF foi fornecida pelo acervo. Os personagens e a marca Pangya pertencem aos respectivos titulares. Esta é uma ilustração temática, não uma captura de partida ou arte oficial do jogo.
