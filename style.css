@@ -14,3 +14,6 @@
 /* Banner da MF: proporção completa na Home e marca central nos cards. */
 .hero-memory-tile[href="#pangya"]{aspect-ratio:16/9}.hero-collection{grid-template-rows:auto 190px}.hero-memory-tile[href="#pangya"] .hero-memory-image{object-position:center}.game-tile[data-game=pangya] .tile-cover{object-position:center}
 @media(max-width:900px){.hero-collection{grid-template-rows:auto 150px}}@media(max-width:650px){.hero-collection{grid-template-rows:auto 145px}}
+
+/* Tempo das memórias, atualizado automaticamente pela data cadastrada. */
+.video-age-badge{display:inline-flex;align-items:center;gap:7px;width:fit-content;margin:12px 0 0;padding:6px 11px;border:1px solid #ad82ef66;border-radius:999px;background:linear-gradient(110deg,#ae7cff20,#65d4ff12);color:#dcc4ff;font-size:11px;font-weight:700;line-height:1.5;letter-spacing:.15px}.video-age-badge:before{content:'✦';color:#75ddd4}#player-link>.video-age-badge{margin:0 0 18px}

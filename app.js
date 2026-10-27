@@ -25,6 +25,20 @@
     if (Number.isNaN(date.getTime()) || date.getFullYear() !== Number(value.slice(0, 4)) || date.getMonth() + 1 !== Number(value.slice(5, 7)) || date.getDate() !== Number(value.slice(8, 10))) return '';
     return date.toLocaleDateString('pt-BR');
   }
+  function videoAgeLabel(video, now = new Date()) {
+    if (!validId(video.youtubeId) || !dateLabel(video.date)) return '';
+    const date = new Date(video.date + 'T12:00:00');
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12);
+    if (date > today) return '';
+    let years = today.getFullYear() - date.getFullYear();
+    if (today.getMonth() < date.getMonth() || (today.getMonth() === date.getMonth() && today.getDate() < date.getDate())) years--;
+    let months = (today.getFullYear() - date.getFullYear()) * 12 + today.getMonth() - date.getMonth();
+    if (today.getDate() < date.getDate()) months--;
+    const days = Math.round((Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) - Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())) / 86400000);
+    const age = years > 0 ? years + (years === 1 ? ' ano' : ' anos') : months > 0 ? months + (months === 1 ? ' mês' : ' meses') : days + (days === 1 ? ' dia' : ' dias');
+    const verb = video.dateType === 'publication' ? 'Publicado' : 'Gravado';
+    return days === 0 ? verb + ' hoje' : verb + ' há ' + age;
+  }
   const videos = (Array.isArray(config.videos) ? config.videos : []).filter(v => v && games[v.game]).map(v => ({ ...v, title: String(v.title || 'Vídeo sem título'), description: String(v.description || ''), tags: Array.isArray(v.tags) ? v.tags : [] }));
   let active = 'all';
   let previousFocus;
@@ -111,6 +125,7 @@
     previousFocus = document.activeElement;
     $('player-title').textContent = video.title; $('player-category').textContent = games[video.game].name;
     $('player-description').textContent = video.description; $('player-content').replaceChildren(); $('player-link').replaceChildren();
+    const age = videoAgeLabel(video); if (age) $('player-link').append(node('p', 'video-age-badge', age));
     const info = node('div', 'memory-info');
     const details = [[validId(video.youtubeId) ? (video.dateType === 'publication' ? 'Data de publicação' : 'Data da jogatina') : 'Data ilustrativa do exemplo', dateLabel(video.date)], ['Personagem / deck', video.character], ['Mapa / modo', video.map], ['Servidor / versão', video.server]];
     details.forEach(([label, value]) => { if (!value) return; const item = node('div'); item.append(node('small', '', label), node('strong', '', String(value))); info.append(item); });
@@ -147,6 +162,7 @@
       const meta = node('div', 'card-meta'); meta.append(node('span', 'card-game', game.name.toUpperCase()), node('span', '', '•'), node('span', '', real ? 'YOUTUBE' : 'DEMONSTRAÇÃO'));
       card.append(thumb, meta, node('h3', '', v.title), node('p', '', real ? 'Assistir gameplay ↗' : 'Prévia do seu próximo conteúdo'));
       const date = dateLabel(v.date); if (date) { const time = node('time', 'memory-date', (real ? (v.dateType === 'publication' ? 'Publicado em ' : '') : 'Data ilustrativa · ') + date); time.dateTime = v.date; card.append(time); }
+      const age = videoAgeLabel(v); if (age) card.append(node('span', 'video-age-badge', age));
       card.addEventListener('click', () => openPlayer(v)); $('video-grid').append(card);
     });
   }
