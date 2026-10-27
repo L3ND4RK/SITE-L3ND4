@@ -2,11 +2,10 @@
 
 A navegação fica assim:
 
-- **Pangya** abre primeiro **Fotos**, com **Vídeos** ao lado.
-- **MU Online** abre somente seus vídeos.
+- **Pangya** abre primeiro **Vídeos**, com **Fotos** e **História da MF** ao lado.
 - **Yu-Gi-Oh!** abre somente seus vídeos.
 - A **Calculadora S4** continua no menu principal e tem um atalho dentro de Pangya.
-- **Outros jogos**, **Lives** e a Home continuam disponíveis.
+- **Lives** e a Home continuam disponíveis.
 
 A galeria de fotos deixa de ter uma entrada separada no menu principal. Ela passa a fazer parte de Pangya, junto com o acervo de vídeos. As apresentações dos jogos foram reduzidas a um cabeçalho compacto para destacar seu conteúdo.
 
@@ -28,10 +27,9 @@ Não substitua `config.js`, seu avatar, o arquivo `index.html` inteiro, as fotos
 
 ## Endereços internos
 
-- `#pangya`: abre Fotos de Pangya.
+- `#pangya`: abre Vídeos de Pangya.
 - `#pangya/fotos`: abre Fotos de Pangya diretamente.
 - `#pangya/videos`: abre Vídeos de Pangya.
-- `#mu`: vídeos de MU Online.
 - `#yugioh`: vídeos de Yu-Gi-Oh!.
 - O endereço antigo `#fotos` continua abrindo Fotos de Pangya.
 
@@ -39,6 +37,6 @@ Não substitua `config.js`, seu avatar, o arquivo `index.html` inteiro, as fotos
 
 As fotos continuam em **fotos-config.js**, na lista `photos`. Use álbuns com nomes como “Capturas do jogo” ou o nome real de um encontro que você queira guardar. O campo `album` cria os filtros automaticamente. Para detalhes de cadastro, consulte `INSTALAR-FOTOS.md` do pacote anterior; o cadastro é o mesmo, mas agora as fotos ficam dentro de Pangya.
 
-Os vídeos continuam em **config.js**, na lista `videos`. O valor de `game` define a biblioteca: `pangya`, `mu` ou `yugioh`. O filtro geral de jogos fica na Home; dentro de cada jogo, aparecem somente os vídeos daquele jogo.
+Os vídeos continuam em **config.js**, na lista `videos`. O valor de `game` define a biblioteca: `pangya` ou `yugioh`. O filtro geral de jogos fica na Home; dentro de cada jogo, aparecem somente os vídeos daquele jogo.
 
-Nenhuma foto real foi incluída nesta atualização. Se seu acervo ainda está vazio, a aba mostra uma apresentação até você cadastrar as primeiras imagens.
+O acervo inclui o álbum Encontro da MaFia 2013 e a História da MF, com relato de MF Lenne.

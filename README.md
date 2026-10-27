@@ -6,14 +6,14 @@ Portal gamer estático em português, responsivo, dark roxo e azul neon. HTML, C
 
 Abra `index.html` no navegador para navegar pela demonstração. Para testar a Twitch, sirva a pasta com um servidor local (por exemplo, `python -m http.server 8080`) e abra `http://localhost:8080`. Não há login, banco de dados, painel administrativo ou sincronização automática com as plataformas nesta versão.
 
-Todas as entradas ficam em `config.js`. Edite o arquivo em um editor de texto. Os seis cards iniciais são exemplos, com IDs vazios: nenhum vídeo ou canal real foi inventado. Substitua os exemplos ou deixe `videos: []` para iniciar sem cards.
+Todas as entradas ficam em `config.js`. Edite o arquivo em um editor de texto. O acervo contém os vídeos reais cadastrados de Pangya e cards de exemplo de Yu-Gi-Oh!, claramente identificados. Substitua os exemplos pelos seus vídeos.
 
 Exemplo de estrutura de um item (substitua os valores antes de publicar):
 
 ```js
 {
   id: "meu-video-01",              // identificador único de sua escolha
-  game: "pangya",                 // pangya, yugioh, mu ou outros
+  game: "pangya",                 // pangya ou yugioh
   title: "Título do seu vídeo",
   description: "Descrição do seu vídeo",
   youtubeId: "",                  // insira o ID real de 11 caracteres
@@ -38,7 +38,7 @@ Em `twitch.channel`, coloque seu login real, sem `@` e sem URL. O domínio atual
 
 Os nomes de opções podem variar com o idioma e a interface do GitHub. Consulte a documentação oficial: https://docs.github.com/pt/pages/getting-started-with-github-pages/creating-a-github-pages-site
 
-Todos os caminhos de arquivos são relativos (`./`), compatíveis com repositórios de projeto e domínios próprios. As abas usam fragmentos (`#pangya`, `#yugioh`, `#mu`, `#outros`, `#lives`), portanto abrir links internos diretamente não depende de rotas de servidor.
+Todos os caminhos de arquivos são relativos (`./`), compatíveis com repositórios de projeto e domínios próprios. As abas usam fragmentos (`#pangya`, `#yugioh`, `#lives`), portanto abrir links internos diretamente não depende de rotas de servidor.
 
 Em telas com espaço inferior a 400 px para o player, a seção orienta a abrir o canal na Twitch, respeitando o tamanho mínimo exigido para incorporação. Referência: https://dev.twitch.tv/docs/embed/video-and-clips/
 
@@ -60,7 +60,7 @@ Google Fonts fornece Inter e Barlow Condensed; sem internet, fontes locais subst
 
 ## Abas personalizadas e Calculadora S4
 
-Pangya, Yu-Gi-Oh! e MU Online possuem apresentação, cores e detalhes próprios, com referências dos jogos nas páginas. O botão Ver vídeos mantém a biblioteca do jogo selecionado. A Home mantém acesso a Outros jogos e inclui um card para a Calculadora S4.
+Pangya e Yu-Gi-Oh! possuem apresentação, cores e detalhes próprios, com referências dos jogos nas páginas. O botão Ver vídeos mantém a biblioteca do jogo selecionado. A Home apresenta os dois jogos e um card para a Calculadora S4.
 
 A aba `#calculadora-s4` é uma central de download, sem cálculos dentro do site. Em `config.js`, edite `calculatorS4.downloadUrl` e coloque seu link HTTPS real. Enquanto estiver vazio ou inválido, o botão fica desativado com Download em breve. Campos `version`, `fileSize`, `description` e `instructions` são opcionais e editáveis. Links para páginas de hospedagem abrem em nova aba; o navegador pode abrir uma página intermediária em vez de baixar diretamente.
 
@@ -71,9 +71,9 @@ Extraia o novo ZIP e substitua `index.html`, `style.css`, `app.js` e `config.js`
 
 ## Acervo pessoal e identidade visual
 
-A Home agora apresenta uma coleção visual de Pangya, Yu-Gi-Oh! e MU Online, com imagens incluídas em `assets/` e ícones vetoriais próprios inspirados nos temas de golfe, cartas e fantasia. As artes dos jogos são identificadas como temáticas; não representam partidas do dono do site. Créditos e fontes em `CREDITOS.md`.
+A Home agora apresenta uma coleção visual de Pangya e Yu-Gi-Oh!, com imagens incluídas em `assets/` e ícones vetoriais próprios inspirados nos temas de golfe e cartas. As artes dos jogos são identificadas como temáticas; não representam partidas do dono do site. Créditos e fontes em `CREDITOS.md`.
 
-Em `config.js`, personalize `archive.title`, `archive.description` e `archive.about`. As estatísticas contam somente vídeos com ID de YouTube preenchido no formato válido, sem consultar a disponibilidade no YouTube. Os seis exemplos não entram na contagem.
+Em `config.js`, personalize `archive.title`, `archive.description` e `archive.about`. As estatísticas contam somente vídeos com ID de YouTube preenchido no formato válido, sem consultar a disponibilidade no YouTube. Os exemplos não entram na contagem.
 
 Cada registro pode receber campos opcionais: `character` (personagem ou deck), `map` (campo ou modo), `server` (servidor ou versão), `memory` (sua lembrança escrita), `screenshot` (caminho de uma captura pessoal) e `screenshotCaption` (legenda). A busca também inclui esses dados. O campo `date` deve ser a data da jogatina, AAAA-MM-DD; o filtro Ano e as datas nos cards usam esse valor. Datas de exemplos são marcadas como ilustrativas.
 

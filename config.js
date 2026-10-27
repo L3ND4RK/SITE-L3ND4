@@ -5,7 +5,7 @@
  * Datas da jogatina no formato AAAA-MM-DD. Remova ou substitua os exemplos.
  * Campos opcionais de memória: character, map, server, memory, screenshot, screenshotCaption.
  * Use IDs únicos e estáveis: eles identificam o link direto de cada memória.
- * game: pangya | yugioh | mu | outros
+ * game: pangya | yugioh
  */
 window.PORTAL_CONFIG = {
   archive: {
@@ -17,8 +17,7 @@ window.PORTAL_CONFIG = {
   // Você pode substituir image por um arquivo seu, ex.: ./assets/meu-pangya.jpg.
   artwork: {
     pangya: { image: "./assets/pangya.jpg", icon: "./assets/icon-pangya.svg", credit: "Pangya / Ntreev · wallpaper temático", source: "https://www.pangyabrasil.net/" },
-    yugioh: { image: "./assets/yugioh.jpg", icon: "./assets/icon-yugioh.svg", credit: "Yu-Gi-Oh! Master Duel / KONAMI · arte temática", source: "https://store.playstation.com/en-us/concept/10001481" },
-    mu: { image: "./assets/mu.jpg", icon: "./assets/icon-mu.svg", credit: "MU Online / WEBZEN · Dark Knight", source: "https://muonline.webzen.com/en/gameinfo/guide/detail/105" }
+    yugioh: { image: "./assets/yugioh.jpg", icon: "./assets/icon-yugioh.svg", credit: "Yu-Gi-Oh! Master Duel / KONAMI · arte temática", source: "https://store.playstation.com/en-us/concept/10001481" }
   },
   calculatorS4: {
     downloadUrl: "", // Cole aqui seu link HTTPS real de download. Vazio = em breve.
@@ -88,8 +87,6 @@ window.PORTAL_CONFIG = {
   memory: ""
 },
     { id: "exemplo-2", game: "yugioh", title: "Uma carta pode mudar tudo", description: "Exemplo de duelo de Yu-Gi-Oh! Adicione o ID de um vídeo seu para ativar o player.", youtubeId: "", date: "2026-01-05", duration: "EXEMPLO", tags: ["duelo", "deck"] },
-    { id: "exemplo-3", game: "mu", title: "A jornada para o próximo level", description: "Exemplo de aventura em MU Online. Este card ainda não possui vídeo.", youtubeId: "", date: "2026-01-04", duration: "EXEMPLO", tags: ["rpg", "aventura"] },
-    { id: "exemplo-5", game: "yugioh", title: "Testando novas estratégias", description: "Exemplo de vídeo sobre estratégias. Substitua pelo seu conteúdo.", youtubeId: "", date: "2026-01-02", duration: "EXEMPLO", tags: ["estratégia", "deck"] },
-    { id: "exemplo-6", game: "outros", title: "Um novo jogo. Outra história.", description: "Espaço de exemplo para outros jogos do canal.", youtubeId: "", date: "2026-01-01", duration: "EXEMPLO", tags: ["descobertas", "gameplay"] }
+    { id: "exemplo-5", game: "yugioh", title: "Testando novas estratégias", description: "Exemplo de vídeo sobre estratégias. Substitua pelo seu conteúdo.", youtubeId: "", date: "2026-01-02", duration: "EXEMPLO", tags: ["estratégia", "deck"] }
   ]
 };

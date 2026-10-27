@@ -7,9 +7,7 @@
   document.head.append(archiveLayout);
   const games = {
     pangya: { name: 'Pangya', word: 'PANGYA', icon: '⚑', subtitle: 'Cada tacada, uma história', color: '#75ddd4', glow: '#326f6b66' },
-    yugioh: { name: 'Yu-Gi-Oh!', word: 'DUEL!', icon: '♠', subtitle: 'É hora do duelo', color: '#c6a2ff', glow: '#6d3da666' },
-    mu: { name: 'MU Online', word: 'MU ONLINE', icon: '⚔', subtitle: 'A aventura não para', color: '#f3b779', glow: '#9b5c3166' },
-    outros: { name: 'Outros jogos', word: 'NEXT PLAY', icon: '✦', subtitle: 'Novos mundos te esperam', color: '#7cbfff', glow: '#285b9b66' }
+    yugioh: { name: 'Yu-Gi-Oh!', word: 'DUEL!', icon: '♠', subtitle: 'É hora do duelo', color: '#c6a2ff', glow: '#6d3da666' }
   };
   const $ = (id) => document.getElementById(id);
   const node = (tag, className, text) => { const e = document.createElement(tag); if (className) e.className = className; if (text !== undefined) e.textContent = text; return e; };
@@ -208,7 +206,7 @@
     if (data.about) $('archive-about-text').textContent = data.about;
     const years = [...new Set(videos.filter(v => dateLabel(v.date)).map(v => v.date.slice(0, 4)))].sort().reverse(); years.forEach(year => { const option = node('option', '', year); option.value = year; $('archive-year').append(option); });
     const actual = videos.filter(v => validId(v.youtubeId)); $('archive-total').textContent = String(actual.length); $('archive-games').textContent = String(new Set(actual.map(v => v.game)).size);
-    Object.keys(games).slice(0, 3).forEach(key => { const image = gameImage(key, 'hero-memory-image'); if (!image) return; const link = node('a', 'hero-memory-tile'); link.href = '#' + key; link.append(image, node('span', '', games[key].name)); $('hero-collection').append(link); });
+    Object.keys(games).forEach(key => { const image = gameImage(key, 'hero-memory-image'); if (!image) return; const link = node('a', 'hero-memory-tile'); link.href = '#' + key; link.append(image, node('span', '', games[key].name)); $('hero-collection').append(link); });
   }
   $('search').addEventListener('input', render); $('sort').addEventListener('change', render); $('archive-year').addEventListener('change', render);
   $('reset').addEventListener('click', () => { $('search').value = ''; $('archive-year').value = ''; location.hash = 'videos'; active = 'all'; render(); $('search').focus(); });

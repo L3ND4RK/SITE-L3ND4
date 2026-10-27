@@ -15,7 +15,7 @@ Em `config.js`, cada item de `videos` é uma entrada do acervo. Substitua um exe
 ```js
 {
   id: "minha-partida-01",
-  game: "pangya",                 // pangya, yugioh, mu ou outros
+  game: "pangya",                 // pangya ou yugioh
   title: "Título da minha jogatina",
   description: "O que aconteceu nesta partida",
   youtubeId: "",                  // Coloque aqui o ID real de 11 caracteres
