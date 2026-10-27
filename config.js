@@ -33,7 +33,20 @@ window.PORTAL_CONFIG = {
     parents: [] // Opcional: outros DOMÍNIOS autorizados, sem https ou caminho.
   },
   videos: [
-    { id: "exemplo-1", game: "pangya", title: "Em busca da tacada perfeita", description: "Exemplo de gameplay de Pangya. Substitua pelo título e descrição do seu vídeo.", youtubeId: "", date: "2026-01-06", duration: "EXEMPLO", tags: ["gameplay", "golf"] },
+  {
+  id: "pangya-ice-spa-2023-07-06",
+  game: "pangya",
+  title: "MF(e37)Lenda -47 ice spa FAIL -49",
+  description: "Jogatina de Pangya no Ice Spa, gravada em 6 de julho de 2023 no servidor U.S.A.",
+  youtubeId: "0zJFmsLHgHo",
+  date: "2023-07-06",
+  duration: "",
+  tags: ["Ice Spa", "gameplay", "-47", "FAIL -49"],
+  character: "MF(e37)Lenda",
+  map: "Ice Spa",
+  server: "U.S.A",
+  memory: ""
+},
     { id: "exemplo-2", game: "yugioh", title: "Uma carta pode mudar tudo", description: "Exemplo de duelo de Yu-Gi-Oh! Adicione o ID de um vídeo seu para ativar o player.", youtubeId: "", date: "2026-01-05", duration: "EXEMPLO", tags: ["duelo", "deck"] },
     { id: "exemplo-3", game: "mu", title: "A jornada para o próximo level", description: "Exemplo de aventura em MU Online. Este card ainda não possui vídeo.", youtubeId: "", date: "2026-01-04", duration: "EXEMPLO", tags: ["rpg", "aventura"] },
     { id: "exemplo-4", game: "pangya", title: "Só mais uma rodada", description: "Exemplo de vídeo de Pangya. Personalize este conteúdo em config.js.", youtubeId: "", date: "2026-01-03", duration: "EXEMPLO", tags: ["gameplay", "rodada"] },
