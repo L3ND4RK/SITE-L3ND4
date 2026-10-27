@@ -6,7 +6,7 @@
   const stylesheet = element('link'); stylesheet.rel = 'stylesheet'; stylesheet.href = new URL('fotos.css', base).href; document.head.append(stylesheet);
   const main = document.querySelector('main'); if (!main) return;
   const root = element('section', 'photos-page'); root.id = 'photos-page'; root.hidden = true; root.setAttribute('aria-labelledby', 'photos-title');
-  main.insertBefore(root, main.querySelector('.closing'));
+  main.insertBefore(root, document.getElementById('videos') || main.querySelector('.closing'));
   function safeImage(value) {
     if (typeof value !== 'string' || !value.trim()) return '';
     try { const url = new URL(value, base); if (url.protocol === 'https:' && /^https:\/\//.test(value)) return url.href;
@@ -18,24 +18,20 @@
     const photos = (Array.isArray(data.photos) ? data.photos : []).filter(p => p && safeImage(p.src)).map((p, i) => ({ ...p, src: safeImage(p.src), title: String(p.title || 'Memória do encontro'), album: String(p.album || 'Encontros da guild'), originalIndex: i }));
     const albums = [...new Set(photos.map(p => p.album))];
     let album = '', matches = [], current = -1, previousFocus;
-    const navLink = element('a', 'photo-nav-link', 'Fotos'); navLink.href = '#fotos'; navLink.dataset.route = 'fotos'; document.getElementById('nav')?.append(navLink);
-    const tile = element('a', 'game-tile photo-grid-tile'); tile.href = '#fotos';
-    const tileCopy = element('span'); tileCopy.append(element('strong', '', 'Fotos da guild'), element('small', '', 'Encontros que viraram história'));
-    tile.append(element('span', 'game-icon', '▧'), tileCopy, element('span', 'arrow', '↗')); document.getElementById('game-links')?.append(tile);
     const intro = element('div', 'photos-intro'), copy = element('div');
-    const title = element('h1', '', data.title || 'Fora do jogo. Dentro da história.'); title.id = 'photos-title'; title.tabIndex = -1;
-    copy.append(element('p', 'eyebrow', 'PANGYA / ÁLBUM DA GUILD'), title, element('p', '', data.description || 'Os encontros, as amizades e os momentos que merecem ficar guardados.'));
+    const title = element('h2', '', data.title || 'Fotos de Pangya'); title.id = 'photos-title'; title.tabIndex = -1;
+    copy.append(element('p', 'eyebrow', 'CAPTURAS DO JOGO & ENCONTROS DA GUILD'), title, element('p', '', data.description || 'As imagens do jogo e dos encontros, organizadas para revisitar cada lembrança.'));
     if (data.guildName) copy.append(element('span', 'photos-guild', String(data.guildName)));
     const art = element('div', 'photos-intro-art'); art.setAttribute('aria-hidden', 'true');
     // Ícone decorativo local; nenhum rosto ou fotografia é inventado.
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); svg.setAttribute('viewBox', '0 0 100 100');
     const iconPath = document.createElementNS('http://www.w3.org/2000/svg', 'path'); iconPath.setAttribute('d', 'M16 27h18l7-10h20l7 10h16v53H16V27Zm34 12a15 15 0 1 0 0 30 15 15 0 0 0 0-30ZM70 36h6'); iconPath.setAttribute('fill', 'none'); iconPath.setAttribute('stroke', 'currentColor'); iconPath.setAttribute('stroke-width', '3'); svg.append(iconPath); art.append(svg, element('span', '', 'GUILD / MEMÓRIAS COMPARTILHADAS')); intro.append(copy, art); root.append(intro);
-    const controls = element('div', 'photos-controls'), filters = element('div', 'photos-albums'); filters.setAttribute('aria-label', 'Filtrar por encontro');
-    [['', 'Todos os encontros'], ...albums.map(name => [name, name])].forEach(([value, label]) => { const button = element('button', '', label); button.type = 'button'; button.dataset.album = value; button.addEventListener('click', () => { album = value; render(); }); filters.append(button); });
+    const controls = element('div', 'photos-controls'), filters = element('div', 'photos-albums'); filters.setAttribute('aria-label', 'Filtrar por álbum');
+    [['', 'Todos os álbuns'], ...albums.map(name => [name, name])].forEach(([value, label]) => { const button = element('button', '', label); button.type = 'button'; button.dataset.album = value; button.addEventListener('click', () => { album = value; render(); }); filters.append(button); });
     const searchLabel = element('label', 'search photos-search'), input = element('input'); input.type = 'search'; input.placeholder = 'Buscar encontro, local ou lembrança…'; input.setAttribute('aria-label', 'Buscar fotos'); searchLabel.append(element('span', '', '⌕'), input); controls.append(filters, searchLabel); root.append(controls);
     const count = element('p', 'photos-count'); count.setAttribute('role', 'status'); count.setAttribute('aria-live', 'polite');
     const grid = element('div', 'photos-grid'), empty = element('div', 'photos-empty'); root.append(count, grid, empty);
-    root.append(element('p', 'photos-note', 'Um acervo de encontros reais. Datas e legendas são registradas com as lembranças de cada momento.'));
+    root.append(element('p', 'photos-note', 'Capturas de Pangya e fotos dos encontros da guild. Cada álbum guarda uma parte da história.'));
     const modal = element('dialog', 'photo-lightbox'); modal.setAttribute('aria-labelledby', 'photo-modal-title');
     const top = element('div', 'dialog-top'), heading = element('h2'); heading.id = 'photo-modal-title';
     const close = element('button', 'close photo-close', '×'); close.type = 'button'; close.setAttribute('aria-label', 'Fechar foto'); top.append(heading, close);
@@ -57,9 +53,9 @@
       const query = normalize(input.value.trim());
       matches = photos.filter(p => (!album || p.album === album) && normalize([p.title, p.album, p.date, p.location, p.caption, p.alt].join(' ')).includes(query));
       filters.querySelectorAll('button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.album === album)));
-      count.textContent = `${matches.length} ${matches.length === 1 ? 'foto' : 'fotos'} · ${albums.length} ${albums.length === 1 ? 'encontro' : 'encontros'}`; grid.replaceChildren(); empty.replaceChildren(); empty.hidden = matches.length > 0;
+      count.textContent = `${matches.length} ${matches.length === 1 ? 'foto' : 'fotos'} · ${albums.length} ${albums.length === 1 ? 'álbum' : 'álbuns'}`; grid.replaceChildren(); empty.replaceChildren(); empty.hidden = matches.length > 0;
       if (!matches.length) {
-        empty.append(element('span', 'photos-empty-mark', '▧'), element('h2', '', failed ? 'O acervo não pôde ser carregado.' : photos.length ? 'Nenhuma foto com esse filtro.' : 'As melhores lembranças vão morar aqui.'), element('p', '', failed ? 'Confira se fotos-config.js foi enviado junto com o tema da galeria.' : photos.length ? 'Tente outro termo ou volte para todos os encontros.' : 'O espaço está pronto para receber as fotos dos encontros da guild. Cada imagem poderá ter álbum, data, local e uma história para contar.'));
+        empty.append(element('span', 'photos-empty-mark', '▧'), element('h2', '', failed ? 'O acervo não pôde ser carregado.' : photos.length ? 'Nenhuma foto com esse filtro.' : 'As melhores lembranças vão morar aqui.'), element('p', '', failed ? 'Confira se fotos-config.js foi enviado junto com a galeria.' : photos.length ? 'Tente outro termo ou volte para todos os álbuns.' : 'O espaço está pronto para receber suas capturas de Pangya e as fotos dos encontros da guild. Cada imagem poderá ter álbum, data, local e uma história para contar.'));
         if (photos.length) { const clear = element('button', 'secondary', 'Ver todas as fotos'); clear.type = 'button'; clear.addEventListener('click', () => { album = ''; input.value = ''; render(); input.focus(); }); empty.append(clear); }
       }
       matches.forEach((photo, index) => {
@@ -76,11 +72,8 @@
     modal.addEventListener('click', event => { if (event.target !== modal) return; const box = modal.getBoundingClientRect(); if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) modal.close(); });
     input.addEventListener('input', render);
     function route() {
-      const visible = location.hash === '#fotos'; root.hidden = !visible;
-      if (!visible) { navLink.removeAttribute('aria-current'); if (modal.open) modal.close(); return; }
-      ['hero', 'archive-about', 'games-section', 'game-page', 'calculator-page', 'videos', 'lives-section'].forEach(id => { const section = document.getElementById(id); if (section) section.hidden = true; });
-      document.querySelectorAll('#nav a').forEach(a => a.removeAttribute('aria-current')); navLink.setAttribute('aria-current', 'page');
-      document.title = 'Fotos da guild | L3ND4 GAMES'; window.scrollTo({ top: 0, behavior: 'instant' }); title.focus({ preventScroll: true });
+      const visible = ['#pangya', '#pangya/fotos', '#fotos'].includes(location.hash); root.hidden = !visible;
+      if (!visible && modal.open) modal.close();
     }
     window.addEventListener('hashchange', route); render(); route();
   }

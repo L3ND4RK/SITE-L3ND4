@@ -1,6 +1,10 @@
 (() => {
   'use strict';
   const config = window.PORTAL_CONFIG || {};
+  const archiveLayout = document.createElement('link');
+  archiveLayout.rel = 'stylesheet';
+  archiveLayout.href = new URL('acervo.css', document.currentScript?.src || document.baseURI).href;
+  document.head.append(archiveLayout);
   const games = {
     pangya: { name: 'Pangya', word: 'PANGYA', icon: '⚑', subtitle: 'Cada tacada, uma história', color: '#75ddd4', glow: '#326f6b66' },
     yugioh: { name: 'Yu-Gi-Oh!', word: 'DUEL!', icon: '♠', subtitle: 'É hora do duelo', color: '#c6a2ff', glow: '#6d3da666' },
@@ -40,31 +44,25 @@
   const calculatorTile = node('a', 'game-tile calculator-tile'); calculatorTile.href = '#calculadora-s4'; calculatorTile.style.setProperty('--accent', '#ae7cff');
   const calculatorCopy = node('span'); calculatorCopy.append(node('strong', '', 'Calculadora S4'), node('small', '', 'Central de download'));
   calculatorTile.append(node('span', 'game-icon', '▦'), calculatorCopy, node('span', 'arrow', '↗')); $('game-links').append(calculatorTile);
-  const pageDetails = {
-    pangya: { label: 'GOLFE FANTASIA / PANGYA', title: 'Precisão na tacada.\nDiversão na rodada.', intro: 'Entre no universo de Pangya: campos cheios de personalidade, desafios a cada buraco e aquela vontade de tentar só mais uma tacada.', topics: [['01 / CAMPOS', 'Explore o percurso', 'Conheça campos como Blue Lagoon e Sepia Wind e acompanhe as rodadas do portal.'], ['02 / GAMEPLAY', 'Cada jogada conta', 'Um espaço para vídeos de tacadas, tentativas, acertos e momentos marcantes das partidas.'], ['03 / COMUNIDADE', 'Jogue junto', 'Reviva as melhores rodadas e acompanhe os novos vídeos de Pangya no L3ND4 GAMES.']], source: 'https://pangya.mygame.in.th/gameinfo/golfcourse', sourceLabel: 'Campos de Pangya · referência do jogo' },
-    yugioh: { label: 'CARTAS & ESTRATÉGIA / YU-GI-OH!', title: 'Seu deck. Sua estratégia.\nSeu próximo duelo.', intro: 'Monstros, Magias e Armadilhas: cada carta abre uma possibilidade. Um espaço para acompanhar duelos e explorar as escolhas por trás de cada jogada.', topics: [['01 / CARTAS', 'Conheça seu arsenal', 'Monstros, Magias e Armadilhas formam a base do jogo de cartas. Entender como elas se combinam faz parte da estratégia.'], ['02 / DUELOS', 'Pense na próxima jogada', 'No jogo de cartas, os duelistas usam suas cartas para enfrentar o oponente e reduzir seus Pontos de Vida a zero.'], ['03 / VÍDEOS', 'Do deck para a mesa', 'Acompanhe os vídeos do portal com duelos, ideias de decks e momentos de virada.']], source: 'https://www.yugioh-card.com/en/rulebook/index.html', sourceLabel: 'Regras oficiais · Yu-Gi-Oh! TCG' },
-    mu: { label: 'RPG & AVENTURA / MU ONLINE', title: 'Uma nova jornada.\nUma lenda para construir.', intro: 'Escolha seu caminho no universo de MU Online. Classes, evolução e aventuras se encontram neste espaço dedicado às jornadas do portal.', topics: [['01 / CLASSES', 'Escolha seu caminho', 'Dark Knight, Dark Wizard e Fairy Elf estão entre as classes do jogo. Conheça diferentes estilos antes de começar sua jornada.'], ['02 / PROGRESSÃO', 'Evolua a cada partida', 'Explore sua classe, os equipamentos e os desafios ao longo da aventura. Sistemas e conteúdo podem variar conforme a versão e o servidor.'], ['03 / GAMEPLAY', 'Acompanhe a jornada', 'Um espaço para vídeos de evolução, exploração e momentos marcantes em MU Online.']], source: 'https://muonline.webzen.com/en/gameinfo', sourceLabel: 'Guia oficial · MU Online / WEBZEN' },
-    outros: { label: 'EXPLORAÇÃO / OUTROS JOGOS', title: 'Novos mundos.\nA mesma vontade de jogar.', intro: 'Toda descoberta merece um play. Aqui ficam os jogos que chegam para ampliar os universos do L3ND4 GAMES.', topics: [['01 / DESCOBERTAS', 'Primeiro contato', 'Um espaço para conhecer novos jogos e acompanhar as primeiras partidas.'], ['02 / MOMENTOS', 'Guarde a melhor parte', 'Gameplays, desafios e histórias que valem ser compartilhadas.'], ['03 / VARIEDADE', 'Sempre uma nova partida', 'Explore os vídeos de outros jogos publicados no portal.']] }
-  };
-  function showGamePage(key) {
-    const root = $('game-page'); root.replaceChildren(); const game = games[key], detail = pageDetails[key];
+  function showGamePage(key, photosSelected = false) {
+    const root = $('game-page'); root.replaceChildren(); const game = games[key];
     root.style.setProperty('--accent', game.color); root.style.setProperty('--glow', game.glow); root.dataset.game = key;
-    const hero = node('div', 'game-banner'), copy = node('div', 'game-banner-copy');
+    const hero = node('div', 'archive-game-header'), copy = node('div', 'archive-game-copy');
     const back = node('a', 'game-back', '← Todos os universos'); back.href = '#home';
-    const title = node('h1', '', detail.title); title.id = 'game-title';
-    copy.append(back, node('p', 'eyebrow', detail.label), title, node('p', 'game-intro', detail.intro));
-    const actions = node('div', 'hero-actions'); const watch = node('a', 'primary', 'Ver vídeos ↓'); watch.href = '#videos';
-    // Scroll without changing route, so the library stays restricted to this game.
-    watch.addEventListener('click', event => { event.preventDefault(); $('videos').scrollIntoView({ behavior: 'smooth' }); }); actions.append(watch);
-    if (key === 'pangya') { const calc = node('a', 'secondary', 'Calculadora S4 ↗'); calc.href = '#calculadora-s4'; actions.append(calc); }
-    copy.append(actions);
-    const art = node('div', 'game-banner-art'); art.setAttribute('aria-hidden', 'true'); art.append(node('span', 'game-emblem', game.icon), node('strong', '', game.word), node('small', '', 'L3ND4 GAMES / ' + detail.label.split(' / ')[0]));
-    const photo = gameImage(key, 'game-photo'); if (photo) { art.replaceChildren(photo); art.classList.add('has-photo'); }
+    const title = node('h1', '', game.name); title.id = 'game-title';
+    copy.append(back, node('p', 'eyebrow', key === 'pangya' ? 'MEU ACERVO / FOTOS & VÍDEOS' : 'MEU ACERVO / VÍDEOS'), title, node('p', 'archive-game-intro', key === 'pangya' ? 'Capturas do jogo, encontros da guild e as jogatinas que merecem ficar guardadas.' : 'Minhas jogatinas, momentos e histórias em vídeo.'));
+    const art = node('div', 'archive-game-art'); art.setAttribute('aria-hidden', 'true');
+    const photo = gameImage(key, 'archive-game-photo'); if (photo) art.append(photo); else art.append(node('span', 'game-emblem', game.icon));
     hero.append(copy, art); root.append(hero);
-    const artData = artwork[key]; if (artData?.credit) { const credit = node('p', 'art-credit', artData.credit + ' · Arte temática, não é captura pessoal.'); root.append(credit); }
-    const grid = node('div', 'game-details');
-    detail.topics.forEach(([label, heading, description]) => { const article = node('article', 'game-detail'); article.append(node('p', 'eyebrow', label), node('h3', '', heading), node('p', '', description)); grid.append(article); }); root.append(grid);
-    if (detail.source) { const a = node('a', 'game-source', detail.sourceLabel + ' ↗'); a.href = detail.source; a.target = '_blank'; a.rel = 'noopener noreferrer'; root.append(a); }
+    if (key === 'pangya') {
+      const tabs = node('nav', 'pangya-sections'); tabs.setAttribute('aria-label', 'Acervo de Pangya');
+      [['fotos', '▧', 'Fotos'], ['videos', '▶', 'Vídeos']].forEach(([section, icon, label]) => {
+        const link = node('a', 'pangya-section-link'); link.href = '#pangya/' + section;
+        const symbol = node('span', '', icon); symbol.setAttribute('aria-hidden', 'true'); link.append(symbol, node('span', '', label));
+        if ((section === 'fotos') === photosSelected) link.setAttribute('aria-current', 'page'); tabs.append(link);
+      });
+      const calc = node('a', 'pangya-calculator-link', 'Calculadora S4 ↗'); calc.href = '#calculadora-s4'; tabs.append(calc); root.append(tabs);
+    }
   }
   function setupCalculator() {
     const data = config.calculatorS4 || {}, root = $('calculator-page');
@@ -131,17 +129,20 @@
     const requested = location.hash.slice(1) || 'home';
     let memory; if (requested.startsWith('memoria=')) { try { memory = videos.find(v => v.id === decodeURIComponent(requested.slice(8))); } catch {} }
     // #videos is an anchor on Home; game routes remain shareable on GitHub Pages.
-    const current = navigation.some(([key]) => key === requested) ? requested : 'home';
+    const current = ['pangya/fotos', 'pangya/videos', 'fotos'].includes(requested) ? 'pangya' : navigation.some(([key]) => key === requested) ? requested : 'home';
+    const pangyaPhotos = current === 'pangya' && requested !== 'pangya/videos';
     const liveOnly = current === 'lives'; const calculatorOnly = current === 'calculadora-s4'; const category = games[current];
-    $('hero').hidden = current !== 'home'; $('games-section').hidden = current !== 'home'; $('videos').hidden = liveOnly || calculatorOnly;
+    $('hero').hidden = current !== 'home'; $('games-section').hidden = current !== 'home'; $('videos').hidden = liveOnly || calculatorOnly || pangyaPhotos;
     $('lives-section').hidden = Boolean(category) || calculatorOnly;
     $('game-page').hidden = !category; $('calculator-page').hidden = !calculatorOnly;
-    if (category) showGamePage(current);
-    $('library-title').textContent = category ? 'Memórias de ' + category.name : 'O arquivo das minhas jogatinas';
+    if (category) showGamePage(current, pangyaPhotos);
+    const gallery = $('photos-page'); if (gallery) gallery.hidden = !pangyaPhotos;
+    $('filters').hidden = Boolean(category);
+    $('library-title').textContent = category ? 'Vídeos de ' + category.name : 'O arquivo das minhas jogatinas';
     $('library-eyebrow').textContent = category ? 'ACERVO · ' + category.name.toUpperCase() : 'MEU ACERVO / CADA PLAY, UMA HISTÓRIA';
     active = category ? current : 'all';
     document.querySelectorAll('#nav a').forEach(a => { if (a.dataset.route === current) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
-    document.title = `${category ? category.name : calculatorOnly ? 'Calculadora S4' : liveOnly ? 'Lives' : 'Início'} | L3ND4 GAMES`;
+    document.title = `${category ? category.name + (current === 'pangya' ? pangyaPhotos ? ' · Fotos' : ' · Vídeos' : ' · Vídeos') : calculatorOnly ? 'Calculadora S4' : liveOnly ? 'Lives' : 'Início'} | L3ND4 GAMES`;
     render();
     if (requested === 'videos') $('videos').scrollIntoView();
     else window.scrollTo({ top: 0, behavior: 'instant' });
