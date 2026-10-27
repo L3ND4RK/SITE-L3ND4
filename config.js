@@ -34,6 +34,25 @@ window.PORTAL_CONFIG = {
   },
   videos: [
     {
+      "id": "pangya-west-wiz-ATrUri40M70",
+      "game": "pangya",
+      "title": "-38 west wiz MF(e37)L3ND4 pangya usa",
+      "description": "Jogatina de Pangya no West Wiz com MF(e37)L3ND4, resultado -38, no servidor U.S.A.",
+      "youtubeId": "ATrUri40M70",
+      "date": "",
+      "duration": "",
+      "tags": [
+        "West Wiz",
+        "gameplay",
+        "-38",
+        "Pangya USA"
+      ],
+      "character": "MF(e37)L3ND4",
+      "map": "West Wiz",
+      "server": "U.S.A",
+      "memory": ""
+    },
+    {
       "id": "pangya-blue-lagoon-2012-12-27",
       "game": "pangya",
       "title": "-40 Blue Lagon MF(e37)L3ND4",
