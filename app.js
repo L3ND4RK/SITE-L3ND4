@@ -87,7 +87,7 @@
     $('player-title').textContent = video.title; $('player-category').textContent = games[video.game].name;
     $('player-description').textContent = video.description; $('player-content').replaceChildren(); $('player-link').replaceChildren();
     const info = node('div', 'memory-info');
-    const details = [[validId(video.youtubeId) ? 'Data da jogatina' : 'Data ilustrativa do exemplo', dateLabel(video.date)], ['Personagem / deck', video.character], ['Mapa / modo', video.map], ['Servidor / versão', video.server]];
+    const details = [[validId(video.youtubeId) ? (video.dateType === 'publication' ? 'Data de publicação' : 'Data da jogatina') : 'Data ilustrativa do exemplo', dateLabel(video.date)], ['Personagem / deck', video.character], ['Mapa / modo', video.map], ['Servidor / versão', video.server]];
     details.forEach(([label, value]) => { if (!value) return; const item = node('div'); item.append(node('small', '', label), node('strong', '', String(value))); info.append(item); });
     if (info.children.length) $('player-link').append(info);
     if (video.memory) { const memory = node('aside', 'memory-note'); memory.append(node('p', 'eyebrow', 'UMA LEMBRANÇA DESTA PARTIDA'), node('p', '', String(video.memory))); $('player-link').append(memory); }
@@ -121,7 +121,7 @@
       if (v.duration) thumb.append(node('span', 'duration', String(v.duration)));
       const meta = node('div', 'card-meta'); meta.append(node('span', 'card-game', game.name.toUpperCase()), node('span', '', '•'), node('span', '', real ? 'YOUTUBE' : 'DEMONSTRAÇÃO'));
       card.append(thumb, meta, node('h3', '', v.title), node('p', '', real ? 'Assistir gameplay ↗' : 'Prévia do seu próximo conteúdo'));
-      const date = dateLabel(v.date); if (date) { const time = node('time', 'memory-date', (real ? '' : 'Data ilustrativa · ') + date); time.dateTime = v.date; card.append(time); }
+      const date = dateLabel(v.date); if (date) { const time = node('time', 'memory-date', (real ? (v.dateType === 'publication' ? 'Publicado em ' : '') : 'Data ilustrativa · ') + date); time.dateTime = v.date; card.append(time); }
       card.addEventListener('click', () => openPlayer(v)); $('video-grid').append(card);
     });
   }

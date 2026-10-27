@@ -33,6 +33,26 @@ window.PORTAL_CONFIG = {
     parents: [] // Opcional: outros DOMÍNIOS autorizados, sem https ou caminho.
   },
   videos: [
+    {
+      "id": "pangya-blue-lagoon-2012-12-27",
+      "game": "pangya",
+      "title": "-40 Blue Lagon MF(e37)L3ND4",
+      "description": "Jogatina de Pangya no Blue Lagoon com MF(e37)L3ND4, resultado -40. Vídeo publicado em 27 de dezembro de 2012.",
+      "youtubeId": "DTcHu81bbgY",
+      "date": "2012-12-27",
+      "dateType": "publication",
+      "duration": "",
+      "tags": [
+        "Blue Lagoon",
+        "Blue Lagon",
+        "gameplay",
+        "-40"
+      ],
+      "character": "MF(e37)L3ND4",
+      "map": "Blue Lagoon",
+      "server": "",
+      "memory": ""
+    },
   {
   id: "pangya-ice-spa-2023-07-06",
   game: "pangya",
