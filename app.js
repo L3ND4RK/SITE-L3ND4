@@ -44,7 +44,7 @@
   const calculatorTile = node('a', 'game-tile calculator-tile'); calculatorTile.href = '#calculadora-s4'; calculatorTile.style.setProperty('--accent', '#ae7cff');
   const calculatorCopy = node('span'); calculatorCopy.append(node('strong', '', 'Calculadora S4'), node('small', '', 'Central de download'));
   calculatorTile.append(node('span', 'game-icon', '▦'), calculatorCopy, node('span', 'arrow', '↗')); $('game-links').append(calculatorTile);
-  function showGamePage(key, photosSelected = false) {
+  function showGamePage(key, selectedSection = 'videos') {
     const root = $('game-page'); root.replaceChildren(); const game = games[key];
     root.style.setProperty('--accent', game.color); root.style.setProperty('--glow', game.glow); root.dataset.game = key;
     const hero = node('div', 'archive-game-header'), copy = node('div', 'archive-game-copy');
@@ -56,14 +56,41 @@
     hero.append(copy, art); root.append(hero);
     if (key === 'pangya') {
       const tabs = node('nav', 'pangya-sections'); tabs.setAttribute('aria-label', 'Acervo de Pangya');
-      [['videos', '▶', 'Vídeos'], ['fotos', '▧', 'Fotos']].forEach(([section, icon, label]) => {
+      [['videos', '▶', 'Vídeos'], ['fotos', '▧', 'Fotos'], ['historia', '✧', 'História da MF']].forEach(([section, icon, label]) => {
         const link = node('a', 'pangya-section-link'); link.href = '#pangya/' + section;
         const symbol = node('span', '', icon); symbol.setAttribute('aria-hidden', 'true'); link.append(symbol, node('span', '', label));
-        if ((section === 'fotos') === photosSelected) link.setAttribute('aria-current', 'page'); tabs.append(link);
+        if (section === selectedSection) link.setAttribute('aria-current', 'page'); tabs.append(link);
       });
       const calc = node('a', 'pangya-calculator-link', 'Calculadora S4 ↗'); calc.href = '#calculadora-s4'; tabs.append(calc); root.append(tabs);
     }
   }
+
+  function setupGuildHistory() {
+    const root = node('section', 'guild-history'); root.id = 'guild-history'; root.hidden = true; root.setAttribute('aria-labelledby', 'guild-history-title');
+    $('game-page').after(root);
+    const hero = node('header', 'guild-history-hero');
+    const heading = node('h2', '', 'Nossa história'); heading.id = 'guild-history-title';
+    hero.append(node('p', 'eyebrow', 'MEMÓRIA DA GUILD / -[MF]-MAFIA'), heading, node('p', 'guild-history-subtitle', 'De uma salinha de Pangya a uma família.'), node('p', 'guild-history-author', 'Relato de MF Lenne'));
+    const quote = node('blockquote', 'guild-history-motto'); quote.append(node('p', '', 'Mais que uma guild. Uma família.'));
+    hero.append(quote);
+    root.append(hero, node('p', 'guild-history-editorial', 'Relato de MF Lenne, preservado no acervo L3ND4 GAMES. A data do texto original não foi informada. Nomes de lideranças, plataformas e referências como “até hoje” pertencem à época em que o relato foi escrito. Foram feitos ajustes de pontuação e organização para facilitar a leitura.'));
+    const layout = node('div', 'guild-history-layout'), index = node('aside', 'guild-history-index'), article = node('article', 'guild-history-article');
+    index.setAttribute('aria-label', 'Capítulos da história'); index.append(node('p', 'eyebrow', 'NESTA HISTÓRIA'));
+    const chapters = [{"title":"As madrugadas no Pangya","paragraphs":["Nossa história começou com uma brincadeira que deu muito certo. Vou tentar resumir, voltando um pouco ao passado.","Comecei a jogar Pangya quando chegou White Wiz, o mapa de Natal, mas jogava muito à noite e atravessava a madrugada — até hoje… rsrs.","Todos os dias, várias pessoas acabavam caindo nas mesmas salinhas de torneio. Eram, na maioria, pais e mães de família, adultos entre mulheres e homens, que só tinham tempo para jogar naqueles horários, após o trabalho.","Fomos nos descobrindo: nomes, idades… e nos tornando amigos a cada dia."]},{"title":"Uma brincadeira que virou MaFia","paragraphs":["Certo dia, em um desses camps, um garoto perguntou a alguém da sala, o Bala: “O que é clan?”.","Ele demorou a explicar e eu, muito brincalhona, me antecipei e disse: “Tá vendo essa salinha aqui? É como um clan: todo mundo joga sempre junto. Na verdade, isso aqui é uma ‘MaFia’!” — momento histórico… rs.","Nossos amigos de todas as noites acharam engraçada a palavra que usei para explicar ao menino o que seria um clan. Desse dia em diante, começamos a nomear as salinhas de MaFia.","Todos os dias marcávamos presença à noite, brincávamos muito uns com os outros, trocando ideias, receitas e piadas."]},{"title":"Nosso cantinho no Orkut","paragraphs":["Aí fiz a comunidade no Orkut, que para mim foi de grande importância. Apesar de termos vários outros meios de comunicação entre a guild — TeamSpeak, Facebook, fórum, entre outros —, a comunidade é o marco e o ponto de referência desde o início.","Lá encontramos todos, os velhos e os novos membros. Na hora do sufoco, é lá que procuram socorro. E não era como as demais: era um cantinho para a gente se conhecer, para diversão e lazer. Às vezes até saíam umas briguinhas, mas coisas de irmãos."]},{"title":"2006: as primeiras letras MF","paragraphs":["Finalmente chegou um dia em que ganhamos 30 cookies no final do ano, presente de Natal do Pangya. O que fizemos? Colocamos MF na frente dos nicks, e foi fundada a MF como clan de fato.","Isso foi em 2006. Era tudo muito precário: não existia opção para fazer guild no site. A gente improvisava assim as equipes, apenas com as letras do clan. Alguns aderiram, outros não.","Os primeiros a mudar o nick foram MF_htinha, MF_Duracell e MF_Minharro. Outros vieram depois."]},{"title":"De Mafia BR a -[MF]-MaFia","paragraphs":["Quando passamos para o Albatross18, fui e fiz a guild no site. A princípio, foi criada com o nome Mafia BR.","Mas houve uma época em que existia uma certa perseguição aos BRs no Albatross18. Bastava ter BR no nome da guild para ser quicado da sala; guilds inteiras eram eliminadas. Sabemos bem que motivos eles tinham, mas acabavam por generalizar todos.","Chegamos então a um consenso: seria melhor para a equipe mudar o nome da guild, mas sem perder a identidade. Deixamos em aberto para sugestões e fizemos uma votação por meio de enquete. O nome escolhido foi -[MF]-MaFia."]},{"title":"Muito mais que duas letras no nick","paragraphs":["A união e a amizade que o grupo tem entre si sempre vieram em primeiro lugar. Fazer parte da equipe não é apenas ter duas letras ou um desenho na frente do seu nick, não é apenas ter status. É muito mais que isso: é ser amigo, parceiro, cúmplice, confiável, respeitador, entre outras coisas…","Quem faz parte dessa família há mais de um ano já sabe bem disso. Desde o nascimento dessa grande família, pessoas de grande valor marcaram presença.","Alguns dividiram a liderança, como Duracell, Dr.Minharro e DJ_JaBa, além de André♥Mirian e Landão, citados como líderes na época deste relato. Todos tiveram participação fundamental em cada fase da história dessa guild.","Passamos por muitas coisas ao longo desses anos. Temos muitas histórias: fizemos confrontos, eventos internos valendo prêmios e tivemos guild nos Pangya BR, Albatross18, Pangya TH — montada por André♥Mirian — e Pangya USA.","Até casamento teve na guild, em forma de evento! Muitas pessoas passaram pela MF e outras tantas têm vontade de participar. Já fomos copiados, xingados, elogiados, odiados e amados."]},{"title":"Quando a amizade saiu das telas","paragraphs":["O que mais marcou foi poder conhecer uma grande parte dessa equipe pessoalmente, em um encontro pré-marcado em Cotia, SP. Fizemos um grande churrasco no Parque Cemucam e todos foram para lá com suas famílias e camisetas personalizadas.","Foi uma emoção muito grande poder conhecê-los pessoalmente, compartilhar um dia de lazer, trocar ideias, conhecer suas famílias e, claro, registrar tudo… rsrs.","Gostamos tanto que fizemos o II Encontro em Itaquera, no Parque do Carmo. Vieram outras pessoas, de cidades afastadas, que tiveram todo o apoio dos amigos da própria guild. No fim, tudo deu certo e foi maravilhoso também.","Pretendemos fazer outros mais, e me sinto muito orgulhosa dessa amizade sólida que construímos. Sei que, com isso, nossa amizade e união só vieram a se fortalecer. Enfim, podemos falar com toda convicção: -[MF]-MaFia, mais que uma guild, uma família."]}];
+    chapters.forEach((chapter, i) => {
+      const section = node('section', 'guild-history-chapter'); section.id = 'mf-capitulo-' + (i + 1); section.tabIndex = -1;
+      section.append(node('p', 'guild-history-number', String(i + 1).padStart(2, '0')), node('h3', '', chapter.title));
+      chapter.paragraphs.forEach(text => section.append(node('p', '', text))); article.append(section);
+      const jump = node('button', 'guild-history-jump', chapter.title); jump.type = 'button';
+      jump.addEventListener('click', () => { section.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); section.focus({ preventScroll: true }); }); index.append(jump);
+    });
+    const signature = node('footer', 'guild-history-signature'); signature.append(node('strong', '', '-[MF]-MaFia'), node('p', '', '“Uma Família”'), node('span', '', 'By: MF Lenne')); article.append(signature); layout.append(index, article); root.append(layout);
+    const album = node('aside', 'guild-history-album'), link = node('a', 'guild-history-album-cover'); link.href = '#pangya/fotos'; link.setAttribute('aria-label', 'Ver fotos dos encontros da guild');
+    const image = node('img'); image.src = './assets/fotos/encontro-mafia-2013/foto-02.jpg'; image.alt = 'Foto coletiva do Encontro da MaFia 2013 em São Carlos, SP.'; image.loading = 'lazy'; link.append(image);
+    const copy = node('div'); copy.append(node('p', 'eyebrow', 'NO ACERVO DE L3ND4 GAMES'), node('h3', '', 'As lembranças também têm imagem.'), node('p', '', 'Revisite os registros dos encontros. No acervo: Encontro da MaFia 2013, em São Carlos, SP.'));
+    const action = node('a', 'secondary', 'Ver fotos dos encontros ↗'); action.href = '#pangya/fotos'; copy.append(action); album.append(link, copy); root.append(album);
+  }
+
   function setupCalculator() {
     const data = config.calculatorS4 || {}, root = $('calculator-page');
     root.style.setProperty('--accent', '#ae7cff'); root.style.setProperty('--glow', '#6d3da666');
@@ -129,20 +156,22 @@
     const requested = location.hash.slice(1) || 'home';
     let memory; if (requested.startsWith('memoria=')) { try { memory = videos.find(v => v.id === decodeURIComponent(requested.slice(8))); } catch {} }
     // #videos is an anchor on Home; game routes remain shareable on GitHub Pages.
-    const current = ['pangya/fotos', 'pangya/videos', 'fotos'].includes(requested) ? 'pangya' : navigation.some(([key]) => key === requested) ? requested : 'home';
+    const current = ['pangya/fotos', 'pangya/videos', 'pangya/historia', 'fotos'].includes(requested) ? 'pangya' : navigation.some(([key]) => key === requested) ? requested : 'home';
     const pangyaPhotos = current === 'pangya' && ['pangya/fotos', 'fotos'].includes(requested);
+    const pangyaHistory = current === 'pangya' && requested === 'pangya/historia';
     const liveOnly = current === 'lives'; const calculatorOnly = current === 'calculadora-s4'; const category = games[current];
-    $('hero').hidden = current !== 'home'; $('games-section').hidden = current !== 'home'; $('videos').hidden = liveOnly || calculatorOnly || pangyaPhotos;
+    $('hero').hidden = current !== 'home'; $('games-section').hidden = current !== 'home'; $('videos').hidden = liveOnly || calculatorOnly || pangyaPhotos || pangyaHistory;
     $('lives-section').hidden = Boolean(category) || calculatorOnly;
     $('game-page').hidden = !category; $('calculator-page').hidden = !calculatorOnly;
-    if (category) showGamePage(current, pangyaPhotos);
+    if (category) showGamePage(current, pangyaHistory ? 'historia' : pangyaPhotos ? 'fotos' : 'videos');
+    $('guild-history').hidden = !pangyaHistory;
     const gallery = $('photos-page'); if (gallery) gallery.hidden = !pangyaPhotos;
     $('filters').hidden = Boolean(category);
     $('library-title').textContent = category ? 'Vídeos de ' + category.name : 'O arquivo das minhas jogatinas';
     $('library-eyebrow').textContent = category ? 'ACERVO · ' + category.name.toUpperCase() : 'MEU ACERVO / CADA PLAY, UMA HISTÓRIA';
     active = category ? current : 'all';
     document.querySelectorAll('#nav a').forEach(a => { if (a.dataset.route === current) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
-    document.title = `${category ? category.name + (current === 'pangya' ? pangyaPhotos ? ' · Fotos' : ' · Vídeos' : ' · Vídeos') : calculatorOnly ? 'Calculadora S4' : liveOnly ? 'Lives' : 'Início'} | L3ND4 GAMES`;
+    document.title = `${category ? category.name + (current === 'pangya' ? pangyaHistory ? ' · História da MF' : pangyaPhotos ? ' · Fotos' : ' · Vídeos' : ' · Vídeos') : calculatorOnly ? 'Calculadora S4' : liveOnly ? 'Lives' : 'Início'} | L3ND4 GAMES`;
     render();
     if (requested === 'videos') $('videos').scrollIntoView();
     else window.scrollTo({ top: 0, behavior: 'instant' });
@@ -187,5 +216,5 @@
   $('player-dialog').addEventListener('click', event => { if (event.target === $('player-dialog')) { const r = event.target.getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) event.target.close(); } });
   $('player-dialog').addEventListener('close', () => { $('player-content').replaceChildren(); previousFocus?.focus(); });
   document.addEventListener('keydown', event => { if (event.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName) && !$('player-dialog').open) { event.preventDefault(); if ($('videos').hidden) location.hash = 'videos'; $('search').focus(); } });
-  $('year').textContent = new Date().getFullYear(); window.addEventListener('hashchange', route); setupArchive(); setupCalculator(); setupTwitch(); route();
+  $('year').textContent = new Date().getFullYear(); window.addEventListener('hashchange', route); setupArchive(); setupGuildHistory(); setupCalculator(); setupTwitch(); route();
 })();
