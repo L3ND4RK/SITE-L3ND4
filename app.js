@@ -109,7 +109,7 @@
     list.sort($('sort').value === 'title' ? (a, b) => a.title.localeCompare(b.title, 'pt-BR') : (a, b) => (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0));
     $('video-grid').replaceChildren(); $('empty').hidden = list.length !== 0;
     $('result-count').textContent = `${list.length} ${list.length === 1 ? 'vídeo encontrado' : 'vídeos encontrados'}`;
-    const hasExamples = videos.some(v => !validId(v.youtubeId)); $('library-demo').hidden = !hasExamples;
+    const hasExamples = list.some(v => !validId(v.youtubeId)); $('library-demo').hidden = !hasExamples;
     list.forEach(v => {
       const game = games[v.game]; const real = validId(v.youtubeId);
       const card = node('button', 'video-card'); card.type = 'button'; card.setAttribute('aria-label', (real ? 'Assistir: ' : 'Abrir exemplo: ') + v.title); card.style.setProperty('--accent', game.color); card.style.setProperty('--glow', game.glow);
