@@ -37,9 +37,9 @@ window.PORTAL_CONFIG = {
       "id": "pangya-west-wiz-ATrUri40M70",
       "game": "pangya",
       "title": "-38 west wiz MF(e37)L3ND4 pangya usa",
-      "description": "Jogatina de Pangya no West Wiz com MF(e37)L3ND4, resultado -38, no servidor U.S.A.",
+      "description": "Jogatina de Pangya no West Wiz com MF(e37)L3ND4, resultado -38, no servidor U.S.A. Vídeo publicado em 29 de dezembro de 2012.",
       "youtubeId": "ATrUri40M70",
-      "date": "",
+      "date": "2012-12-29",
       "duration": "",
       "tags": [
         "West Wiz",
@@ -50,7 +50,8 @@ window.PORTAL_CONFIG = {
       "character": "MF(e37)L3ND4",
       "map": "West Wiz",
       "server": "U.S.A",
-      "memory": ""
+      "memory": "",
+      "dateType": "publication"
     },
     {
       "id": "pangya-blue-lagoon-2012-12-27",
