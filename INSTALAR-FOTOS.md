@@ -12,7 +12,7 @@
 
 4. Salve em **Commit changes**. Após a publicação, atualize com **Ctrl + F5**. A aba **Fotos** aparecerá no menu e um card **Fotos da guild** aparecerá na Home.
 
-Não precisa substituir suas configurações de vídeos, avatar, fotos dos jogos ou tema egípcio. O código-fonte completo local já inclui o script no `head`; se estiver usando esse arquivo, não o adicione de novo.
+Não precisa substituir suas configurações de vídeos, avatar, fotos dos jogos. O código-fonte completo local já inclui o script no `head`; se estiver usando esse arquivo, não o adicione de novo.
 
 ## Colocar as fotos
 

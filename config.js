@@ -5,20 +5,21 @@
  * Datas da jogatina no formato AAAA-MM-DD. Remova ou substitua os exemplos.
  * Campos opcionais de memória: character, map, server, memory, screenshot, screenshotCaption.
  * Use IDs únicos e estáveis: eles identificam o link direto de cada memória.
- * game: pangya | yugioh
+ * game: pangya
  */
 window.PORTAL_CONFIG = {
   archive: {
     title: "Minhas jogatinas. Minhas memórias.",
-    description: "Um lugar para guardar as partidas, os duelos e as aventuras que fizeram parte da minha história. Cada vídeo, uma lembrança. Cada jogo, um capítulo.",
-    about: "Este é o meu acervo pessoal de jogos. Aqui eu reúno minhas jogatinas e os momentos que quero poder revisitar, compartilhar e lembrar daqui a muitos anos."
+    description: "Um lugar para guardar as tacadas, os encontros e as aventuras que fizeram parte da minha história. Cada vídeo, uma lembrança. Pangya, muitos capítulos.",
+    about: "Este é o meu acervo pessoal de Pangya. Aqui eu reúno minhas jogatinas e os momentos que quero poder revisitar, compartilhar e lembrar daqui a muitos anos."
   },
   // Artes temáticas dos jogos, separadas das suas capturas pessoais.
   // Você pode substituir image por um arquivo seu, ex.: ./assets/meu-pangya.jpg.
   artwork: {
     pangya: { image: "./assets/pangya-mf-banner.jpg", icon: "./assets/icon-pangya.svg", credit: "Arte temática criada com IA para L3ND4 GAMES · marca MF fornecida pelo acervo", source: "" },
-    yugioh: { image: "./assets/yugioh.jpg", icon: "./assets/icon-yugioh.svg", credit: "Yu-Gi-Oh! Master Duel / KONAMI · arte temática", source: "https://store.playstation.com/en-us/concept/10001481" }
   },
+  // Dicas reais: adicione itens como { title: "Título", content: "Sua dica" }.
+  tips: [],
   calculatorS4: {
     downloadUrl: "", // Cole aqui seu link HTTPS real de download. Vazio = em breve.
     version: "", // Opcional: versão real do arquivo.
@@ -87,7 +88,5 @@ window.PORTAL_CONFIG = {
   server: "U.S.A",
   memory: ""
 },
-    { id: "exemplo-2", game: "yugioh", title: "Uma carta pode mudar tudo", description: "Exemplo de duelo de Yu-Gi-Oh! Adicione o ID de um vídeo seu para ativar o player.", youtubeId: "", date: "2026-01-05", duration: "EXEMPLO", tags: ["duelo", "deck"] },
-    { id: "exemplo-5", game: "yugioh", title: "Testando novas estratégias", description: "Exemplo de vídeo sobre estratégias. Substitua pelo seu conteúdo.", youtubeId: "", date: "2026-01-02", duration: "EXEMPLO", tags: ["estratégia", "deck"] }
   ]
 };
