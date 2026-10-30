@@ -22,9 +22,10 @@ window.PORTAL_CONFIG = {
   tips: [],
   calculatorS4: {
     downloadUrl: "", // Cole aqui seu link HTTPS real de download. Vazio = em breve.
-    version: "", // Opcional: versão real do arquivo.
+    version: "", // Versão real do arquivo.
+    compatibility: "", // Servidor ou versão do Pangya compatível, quando confirmado.
     fileSize: "", // Opcional: tamanho real do arquivo.
-    description: "O espaço da Calculadora S4 no L3ND4 GAMES. O arquivo para download será disponibilizado por aqui.",
+    description: "Ferramentas para acompanhar seus estudos e treinos no Pangya. Consulte aqui o arquivo, a versão e as instruções quando o download estiver disponível.",
     instructions: ["Quando o download estiver disponível, use o botão desta página.", "Após baixar, siga as instruções que acompanham o arquivo."]
   },
   twitch: {
@@ -36,7 +37,7 @@ window.PORTAL_CONFIG = {
     {
       "id": "pangya-west-wiz-ATrUri40M70",
       "game": "pangya",
-      "title": "-38 west wiz MF(e37)L3ND4 pangya usa",
+      "title": "West Wiz −38",
       "description": "Jogatina de Pangya no West Wiz com MF(e37)L3ND4, resultado -38, no servidor U.S.A. Vídeo publicado em 29 de dezembro de 2012.",
       "youtubeId": "ATrUri40M70",
       "date": "2012-12-29",
@@ -56,7 +57,7 @@ window.PORTAL_CONFIG = {
     {
       "id": "pangya-blue-lagoon-2012-12-27",
       "game": "pangya",
-      "title": "-40 Blue Lagon MF(e37)L3ND4",
+      "title": "Blue Lagoon −40",
       "description": "Jogatina de Pangya no Blue Lagoon com MF(e37)L3ND4, resultado -40. Vídeo publicado em 27 de dezembro de 2012.",
       "youtubeId": "DTcHu81bbgY",
       "date": "2012-12-27",
@@ -76,7 +77,7 @@ window.PORTAL_CONFIG = {
   {
   id: "pangya-ice-spa-2023-07-06",
   game: "pangya",
-  title: "MF(e37)Lenda -47 ice spa FAIL -49",
+  title: "Ice Spa −47 | tentativa de −49",
   description: "Jogatina de Pangya no Ice Spa, no servidor U.S.A. Vídeo publicado em 6 de julho de 2013.",
   youtubeId: "0zJFmsLHgHo",
   date: "2013-07-06",

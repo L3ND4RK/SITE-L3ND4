@@ -17,3 +17,5 @@ O desenho L3ND4 GAMES e os ícones locais compõem a identidade do portal. As fo
 ## Emblema do personagem L3ND4
 
 `assets/l3nd4-pangya-logo.png`: logo criada com IA a partir das três capturas do personagem de Pangya fornecidas pelo proprietário. Preserva o traje de urso, os óculos, a barba e as asas como referências visuais. Personagens e elementos de Pangya pertencem aos respectivos titulares. A ilustração não é um logotipo oficial do jogo.
+
+`assets/l3nd4-favicon.png`: versão simplificada da logo do personagem L3ND4, criada com a ferramenta de imagens integrada para leitura em tamanhos pequenos, com fundo transparente.

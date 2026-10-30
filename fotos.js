@@ -16,6 +16,8 @@
   const normalize = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
   function start(data, failed = false) {
     const photos = (Array.isArray(data.photos) ? data.photos : []).filter(p => p && safeImage(p.src)).map((p, i) => ({ ...p, src: safeImage(p.src), title: String(p.title || 'Memória do encontro'), album: String(p.album || 'Encontros da guild'), originalIndex: i }));
+    const photoCount = document.getElementById('archive-photos'); if (photoCount) photoCount.textContent = failed ? '—' : String(photos.length);
+    const since = document.getElementById('archive-since'); const photoYears = photos.map(p => Number(String(p.date || '').slice(0, 4))).filter(y => Number.isInteger(y) && y >= 1900 && y <= new Date().getFullYear()); if (since && photoYears.length) { const current = Number(since.textContent); since.textContent = String(Math.min(...photoYears, current >= 1900 ? current : Infinity)); }
     const albums = [...new Set(photos.map(p => p.album))];
     let album = '', matches = [], current = -1, previousFocus;
     const intro = element('div', 'photos-intro'), copy = element('div');

@@ -41,26 +41,30 @@
   const videos = (Array.isArray(config.videos) ? config.videos : []).filter(v => v && games[v.game]).map(v => ({ ...v, title: String(v.title || 'Vídeo sem título'), description: String(v.description || ''), tags: Array.isArray(v.tags) ? v.tags : [] }));
   let active = 'all';
   let previousFocus;
-  const navigation = [['home', 'Início'], ['pangya', 'Vídeos'], ['calculadora-s4', 'Calculadoras'], ['dicas', 'Dicas'], ['pangya/fotos', 'Fotos'], ['pangya/historia', 'História da MF'], ['lives', 'Lives']];
-  navigation.forEach(([key, name]) => { const a = node('a', '', name); a.href = '#' + key; a.dataset.route = key; $('nav').append(a); });
+  const hasTwitch = typeof config.twitch?.channel === 'string' && /^[a-zA-Z0-9_]{1,25}$/.test(config.twitch.channel.trim());
+  const navigation = [['home', 'Início'], ['pangya', 'Vídeos'], ['calculadora-s4', 'Calculadoras'], ['dicas', 'Dicas'], ['pangya/fotos', 'Fotos'], ['pangya/historia', 'História da MF'], ...(hasTwitch ? [['lives', 'Lives']] : [])];
+  navigation.forEach(([key, name]) => { const a = node('a', '', name); a.href = '#' + key; a.dataset.route = key; a.addEventListener('click', () => setMenu(false)); $('nav').append(a); });
+  function setMenu(open) { $('menu-toggle').setAttribute('aria-expanded', String(open)); $('nav').classList.toggle('menu-open', open); }
+  $('menu-toggle').addEventListener('click', () => setMenu($('menu-toggle').getAttribute('aria-expanded') !== 'true'));
+  document.addEventListener('keydown', event => { if (event.key === 'Escape' && $('menu-toggle').getAttribute('aria-expanded') === 'true') { setMenu(false); $('menu-toggle').focus(); } });
   Object.entries(games).forEach(([key, game]) => {
     const a = node('a', 'game-tile'); a.href = '#' + key; a.style.setProperty('--accent', game.color);
     const icon = node('span', 'game-icon', game.icon); icon.setAttribute('aria-hidden', 'true');
-    const copy = node('span'); copy.append(node('strong', '', game.name), node('small', '', game.subtitle));
+    const copy = node('span'); copy.append(node('strong', '', 'Vídeos de Pangya'), node('small', '', 'Tacadas e recordações do acervo'));
     const cover = gameImage(key, 'tile-cover'); if (cover) a.append(cover);
     const emblem = gameImage(key, 'game-icon-image', true); if (emblem) icon.replaceChildren(emblem);
     a.dataset.game = key;
     a.append(icon, copy, node('span', 'arrow', '↗')); $('game-links').append(a);
   });
   const calculatorTile = node('a', 'game-tile calculator-tile'); calculatorTile.href = '#calculadora-s4'; calculatorTile.style.setProperty('--accent', '#ae7cff');
-  const calculatorCopy = node('span'); calculatorCopy.append(node('strong', '', 'Calculadora S4'), node('small', '', 'Central de download'));
+  const calculatorCopy = node('span'); calculatorCopy.append(node('strong', '', 'Calculadora S4'), node('small', '', config.calculatorS4?.downloadUrl ? 'Download e instruções' : 'Download em preparação'));
   calculatorTile.append(node('span', 'game-icon', '▦'), calculatorCopy, node('span', 'arrow', '↗')); $('game-links').append(calculatorTile);
   const tipsTile = node('a', 'game-tile tips-tile'); tipsTile.href = '#dicas'; tipsTile.append(node('span', 'game-icon', '✧'), node('strong', '', 'Dicas de Pangya'), node('span', 'arrow', '↗')); $('game-links').append(tipsTile);
   function showGamePage(key, selectedSection = 'videos') {
     const root = $('game-page'); root.replaceChildren(); const game = games[key];
     root.style.setProperty('--accent', game.color); root.style.setProperty('--glow', game.glow); root.dataset.game = key;
     const hero = node('div', 'archive-game-header'), copy = node('div', 'archive-game-copy');
-    const back = node('a', 'game-back', '← Todos os universos'); back.href = '#home';
+    const back = node('a', 'game-back', '← Voltar ao início'); back.href = '#home';
     const title = node('h1', '', game.name); title.id = 'game-title';
     copy.append(back, node('p', 'eyebrow', key === 'pangya' ? 'MEU ACERVO / FOTOS & VÍDEOS' : 'MEU ACERVO / VÍDEOS'), title, node('p', 'archive-game-intro', key === 'pangya' ? 'Capturas do jogo, encontros da guild e as jogatinas que merecem ficar guardadas.' : 'Minhas jogatinas, momentos e histórias em vídeo.'));
     const art = node('div', 'archive-game-art'); art.setAttribute('aria-hidden', 'true');
@@ -109,7 +113,7 @@
     const title = node('h1', '', 'Dicas de Pangya'); title.id = 'tips-title';
     root.append(node('p', 'eyebrow', 'PANGYA / APRENDER E COMPARTILHAR'), title, node('p', 'intro', 'Um espaço para reunir minhas dicas, anotações e aprendizados nas jogatinas.'));
     const tips = Array.isArray(config.tips) ? config.tips.filter(t => t && t.title && t.content) : [];
-    if (!tips.length) root.append(node('p', 'tips-empty', 'As primeiras dicas ainda estão sendo preparadas. Enquanto isso, explore os vídeos do acervo.'));
+    if (!tips.length) { const empty = node('div', 'tips-empty'); empty.append(node('p', 'eyebrow', 'CONTEÚDO EM PREPARAÇÃO'), node('h2', '', 'Cada aprendizado merece ser guardado.'), node('p', '', 'As dicas pessoais ainda não foram publicadas. Este espaço vai reunir anotações de mapas, treinos e uso das calculadoras, com referências das próprias jogatinas.')); root.append(empty); }
     const grid = node('div', 'tips-grid');
     tips.forEach(tip => { const item = node('article', 'tip-card'); item.append(node('h2', '', String(tip.title)), node('p', '', String(tip.content))); grid.append(item); });
     root.append(grid);
@@ -123,9 +127,10 @@
     copy.append(back, node('p', 'eyebrow', 'PANGYA / CENTRAL DE DOWNLOAD'), title, node('p', 'game-intro', data.description || 'Baixe a Calculadora S4 disponibilizada pelo portal.'));
     let url; try { const candidate = new URL(data.downloadUrl); if (candidate.protocol === 'https:') url = candidate.href; } catch {}
     if (url) { const a = node('a', 'primary', 'Baixar Calculadora S4 ↗'); a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; copy.append(a, node('p', 'download-status', 'O link abre o local de download em uma nova aba.')); }
-    else { const button = node('button', 'primary', 'Download em breve'); button.disabled = true; copy.append(button, node('p', 'download-status', 'O link de download ainda não foi disponibilizado.')); }
-    const meta = [data.version ? 'Versão: ' + data.version : '', data.fileSize ? 'Tamanho: ' + data.fileSize : ''].filter(Boolean); if (meta.length) copy.append(node('p', 'download-meta', meta.join(' · ')));
+    else { copy.append(node('p', 'tool-pending', 'ARQUIVO EM PREPARAÇÃO'), node('p', 'download-status', 'A Calculadora S4 ainda não está disponível para download. O arquivo e suas informações serão publicados aqui quando forem fornecidos.')); }
+    const meta = [data.version ? 'Versão: ' + data.version : '', data.fileSize ? 'Tamanho: ' + data.fileSize : '', data.compatibility ? 'Compatibilidade: ' + data.compatibility : ''].filter(Boolean); if (meta.length) copy.append(node('p', 'download-meta', meta.join(' · ')));
     const art = node('div', 'game-banner-art calculator-art'); art.setAttribute('aria-hidden', 'true'); art.append(node('span', 'game-emblem', '▦'), node('strong', '', 'S4'), node('small', '', 'CALCULADORA / DOWNLOAD')); hero.append(copy, art); root.append(hero);
+    if (!url) { const backToVideos = node('a', 'secondary', 'Explorar os vídeos enquanto isso ↗'); backToVideos.href = '#pangya'; root.append(backToVideos); return; }
     const guide = node('article', 'download-guide'); guide.append(node('p', 'eyebrow', 'PARA COMEÇAR'), node('h2', '', 'Como baixar'));
     const steps = node('ol'); const instructions = Array.isArray(data.instructions) ? data.instructions : ['Use o botão quando o link estiver disponível.', 'Siga as instruções que acompanham o arquivo.']; instructions.forEach(text => steps.append(node('li', '', String(text)))); guide.append(steps); root.append(guide);
   }
@@ -173,6 +178,7 @@
       if (v.duration) thumb.append(node('span', 'duration', String(v.duration)));
       const meta = node('div', 'card-meta'); meta.append(node('span', 'card-game', game.name.toUpperCase()), node('span', '', '•'), node('span', '', real ? 'YOUTUBE' : 'DEMONSTRAÇÃO'));
       card.append(thumb, meta, node('h3', '', v.title), node('p', '', real ? 'Assistir gameplay ↗' : 'Prévia do seu próximo conteúdo'));
+      const record = [v.character, v.server, v.map].filter(Boolean); if (record.length) card.append(node('p', 'card-record', record.join(' · ')));
       const date = dateLabel(v.date); if (date) { const time = node('time', 'memory-date', (real ? (v.dateType === 'publication' ? 'Publicado em ' : '') : 'Data ilustrativa · ') + date); time.dateTime = v.date; card.append(time); }
       const age = videoAgeLabel(v); if (age) card.append(node('span', 'video-age-badge', age));
       card.addEventListener('click', () => openPlayer(v)); $('video-grid').append(card);
@@ -186,8 +192,9 @@
     const pangyaPhotos = current === 'pangya' && ['pangya/fotos', 'fotos'].includes(requested);
     const pangyaHistory = current === 'pangya' && requested === 'pangya/historia';
     const liveOnly = current === 'lives'; const calculatorOnly = current === 'calculadora-s4' || current === 'calculadoras'; const tipsOnly = current === 'dicas'; const category = games[current];
+    $('featured-memory').hidden = current !== 'home';
     $('hero').hidden = current !== 'home'; $('games-section').hidden = current !== 'home'; $('videos').hidden = liveOnly || calculatorOnly || pangyaPhotos || pangyaHistory || tipsOnly;
-    $('lives-section').hidden = Boolean(category) || calculatorOnly || tipsOnly;
+    $('lives-section').hidden = !hasTwitch || Boolean(category) || calculatorOnly || tipsOnly;
     $('game-page').hidden = !category; $('calculator-page').hidden = !calculatorOnly; $('tips-page').hidden = !tipsOnly;
     if (category) showGamePage(current, pangyaHistory ? 'historia' : pangyaPhotos ? 'fotos' : 'videos');
     $('guild-history').hidden = !pangyaHistory;
@@ -233,7 +240,7 @@
     if (data.description) $('hero-description').textContent = data.description;
     if (data.about) $('archive-about-text').textContent = data.about;
     const years = [...new Set(videos.filter(v => dateLabel(v.date)).map(v => v.date.slice(0, 4)))].sort().reverse(); years.forEach(year => { const option = node('option', '', year); option.value = year; $('archive-year').append(option); });
-    const actual = videos.filter(v => validId(v.youtubeId)); $('archive-total').textContent = String(actual.length); $('archive-games').textContent = String(new Set(actual.map(v => v.game)).size);
+    const actual = videos.filter(v => validId(v.youtubeId)); $('archive-total').textContent = String(actual.length); const firstYear = actual.filter(v => dateLabel(v.date)).map(v => Number(v.date.slice(0, 4))).sort((a, b) => a - b)[0]; $('archive-since').textContent = firstYear ? String(firstYear) : '—';
     Object.keys(games).forEach(key => { const image = gameImage(key, 'hero-memory-image'); if (!image) return; const link = node('a', 'hero-memory-tile'); link.href = '#' + key; link.append(image, node('span', '', games[key].name)); $('hero-collection').append(link); });
   }
   $('search').addEventListener('input', render); $('sort').addEventListener('change', render); $('archive-year').addEventListener('change', render);
