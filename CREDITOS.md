@@ -13,3 +13,7 @@ O desenho L3ND4 GAMES e os ícones locais compõem a identidade do portal. As fo
 ## Banner Pangya da MF
 
 `assets/pangya-mf-banner.jpg`: composição temática criada com IA para o acervo L3ND4 GAMES a partir da referência visual de Pangya e do logo MF PANGYA enviado pelo proprietário. A marca MF foi fornecida pelo acervo. Os personagens e a marca Pangya pertencem aos respectivos titulares. Esta é uma ilustração temática, não uma captura de partida ou arte oficial do jogo.
+
+## Emblema do personagem L3ND4
+
+`assets/l3nd4-pangya-logo.png`: logo criada com IA a partir das três capturas do personagem de Pangya fornecidas pelo proprietário. Preserva o traje de urso, os óculos, a barba e as asas como referências visuais. Personagens e elementos de Pangya pertencem aos respectivos titulares. A ilustração não é um logotipo oficial do jogo.

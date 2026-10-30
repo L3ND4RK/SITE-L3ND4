@@ -21,3 +21,6 @@
 /* Portal dedicado a Pangya. */
 .hero-collection{grid-template-columns:1fr;grid-template-rows:auto}.hero-memory-tile[href="#pangya"]{grid-column:1/-1}.game-links{grid-template-columns:repeat(3,minmax(0,1fr))}.game-links>.game-tile,.game-links>.calculator-tile{grid-column:auto}.tips-page{padding:40px 0}.tips-page h1{font-size:48px}.tips-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:24px 0}.tip-card,.tips-empty{padding:24px;background:var(--panel);border:1px solid var(--line);border-radius:10px}.tip-card h2{font-size:24px;margin-bottom:16px}.tip-card p{white-space:pre-wrap;color:#c0bfd0}.tips-empty{color:var(--muted);max-width:760px}.header .brand{font-size:20px}.header nav{gap:14px}.header nav a{font-size:11px}
 @media(max-width:900px){.hero-collection{grid-template-rows:auto}.header-live{display:none}}@media(max-width:650px){.game-links,.tips-grid{grid-template-columns:1fr}.game-links>.game-tile{grid-column:1/-1}.hero-collection{grid-template-rows:auto}.tips-page h1{font-size:38px}}
+
+/* Emblema do personagem L3ND4, com proporção e transparência preservadas. */
+.brand>img{width:72px;height:72px;object-fit:contain;flex-shrink:0;filter:drop-shadow(0 2px 7px #0005)}@media(max-width:650px){.brand>img{width:58px;height:58px}}
